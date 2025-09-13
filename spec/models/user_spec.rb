@@ -24,5 +24,20 @@ RSpec.describe User, type: :model do
           end.to raise_error(ActiveRecord::RecordInvalid)
         end
       end
+  end
+
+  describe "User post creation" do
+    let(:user) { create(:user) }
+    it "will create a new post" do
+      post = user.posts.build(body: "test")
+      expect(post).to be_valid
     end
+
+    it "can create multiple posts" do
+      post_1 = user.posts.build(body: "test")
+      post_2 = user.posts.build(body: "test")
+      expect(post_1).to be_valid
+      expect(post_2).to be_valid
+    end
+  end
 end
