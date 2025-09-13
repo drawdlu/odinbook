@@ -1,24 +1,18 @@
-# README
+# Odinbook
+A social media clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Objective
+Make a social media app with the following capabilities: 
+- Sign In
+- Send follow requests to other users
+- Create posts
+- Like and comment on posts
+- Display post author, content, likes, comments
+- Display collection of own posts and followed users posts
+- Create a user profile
+- Index page for all users
+- Deploy app to a hosting provider
+- Send welcome email
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This is the final project for the Rails course in The Odin Project: 
+https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project
