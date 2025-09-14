@@ -14,5 +14,8 @@ class User < ApplicationRecord
   has_many :following_users, class_name: "Follow", foreign_key: "following_id", dependent: :destroy
   has_many :followers, through: :following_users, source: "follower"
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: "post"
+
   validates :username, presence: true, uniqueness: true
 end
