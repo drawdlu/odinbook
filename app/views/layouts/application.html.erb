@@ -23,10 +23,20 @@
   </head>
 
   <body>
-      <div class="notification">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
+    <div class="navigation">
+      <% if user_signed_in? %>
+        <div class="home">
+          <%= link_to "Home", root_path %>
+        </div>
+        <div class="logout">
+          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
+        </div>
+      <% end %>
+    </div>
+    <div class="notification">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
     <%= yield %>
   </body>
 </html>
