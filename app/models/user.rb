@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :followings, through: :followed_users, source: "following"
 
   # Users that follow this user
-  has_many :following_users, class_name: "Follow", foreign_key: "following_id", dependent: :destroy
-  has_many :followers, through: :following_users, source: "follower"
+  has_many :follower_users, class_name: "Follow", foreign_key: "following_id", dependent: :destroy
+  has_many :followers, through: :follower_users, source: "follower"
 
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: "post"
