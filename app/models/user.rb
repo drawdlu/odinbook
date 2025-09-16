@@ -24,4 +24,18 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
+
+  scope :all_except, ->(user) { where.not(id: user) }
+
+  def follower?(current_user)
+    self.followers.to_a.include?(current_user)
+  end
+
+  def pending_follower?(current_user)
+    self.pending_followers.to_a.include?(current_user)
+  end
+
+  def follower_id(current_user)
+    self.follower_users.find_by(follower_id: current_user.id).id
+  end
 end
