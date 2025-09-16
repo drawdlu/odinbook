@@ -21,4 +21,5 @@ class User < ApplicationRecord
   has_many :commented_posts, through: :comments, source: "post"
 
   validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 end

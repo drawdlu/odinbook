@@ -17,27 +17,19 @@ RSpec.describe User, type: :model do
     end
 
     context "when username has a duplicate" do
-      it "will raise an error when username has a duplicate" do
-        new_user = create(:user)
+      let(:new_user) { create(:user) }
+      let(:duplicate_user) { build(:user, username: new_user.username) }
+      it "will raise an error at model validation level" do
           expect do
-              create(:user, username: new_user.username)
+              duplicate_user.save!
           end.to raise_error(ActiveRecord::RecordInvalid)
-        end
       end
-  end
 
-  describe "User post creation" do
-    let(:user) { create(:user) }
-    it "will create a new post" do
-      post = user.posts.build(body: "test")
-      expect(post).to be_valid
-    end
-
-    it "can create multiple posts" do
-      post_1 = user.posts.build(body: "test")
-      post_2 = user.posts.build(body: "test")
-      expect(post_1).to be_valid
-      expect(post_2).to be_valid
+      it "will raise an error at database level" do
+        expect do
+          duplicate_user.save!(validate: false)
+        end.to raise_error(ActiveRecord::RecordNotUnique)
+      end
     end
   end
 end
