@@ -24,5 +24,22 @@ RSpec.describe Follow, type: :model do
         expect(follow.status).to eq "pending"
       end
     end
+
+    context "when trying to follow twice" do
+      it "will raise an error at model level validation" do
+        user_1.followings<<(user_2)
+        expect do
+          user_1.followings<<(user_2)
+        end.to raise_error(ActiveRecord::RecordInvalid)
+      end
+
+      it "will raise an error at database level validation" do
+        user_1.followings<<(user_2)
+        duplicate_follow = user_1.followed_users.build(following_id: user_2.id)
+        expect do
+          duplicate_follow.save(validate: false)
+        end.to raise_error(ActiveRecord::RecordNotUnique)
+      end
+    end
   end
 end
