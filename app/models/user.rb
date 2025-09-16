@@ -8,11 +8,13 @@ class User < ApplicationRecord
 
   # Users that this user is following
   has_many :followed_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  has_many :followings, through: :followed_users, source: "following"
+  has_many :pending_followings, -> { where("status = ?", 0) }, through: :followed_users, source: "following"
+  has_many :followings, -> { where("status = ?", 1) }, through: :followed_users, source: "following"
 
   # Users that follow this user
   has_many :follower_users, class_name: "Follow", foreign_key: "following_id", dependent: :destroy
-  has_many :followers, through: :follower_users, source: "follower"
+  has_many :pending_followers, -> { where("status = ?", 0) }, through: :follower_users, source: "follower"
+  has_many :followers, -> { where("status = ?", 1) }, through: :follower_users, source: "follower"
 
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: "post"
