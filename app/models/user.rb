@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
   has_many :posts
 
@@ -22,7 +23,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :commented_posts, through: :comments, source: "post"
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: true
 
   scope :all_except, ->(user) { where.not(id: user) }
@@ -37,5 +38,21 @@ class User < ApplicationRecord
 
   def follower_id(current_user)
     self.follower_users.find_by(follower_id: current_user.id).id
+  end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data["email"]).first
+
+    # Uncomment the section below if you want users to be created if they don't exist
+    unless user
+        user = User.create(
+          username: data["name"],
+          email: data["email"],
+          password: Devise.friendly_token[0, 20]
+        )
+    end
+
+    user
   end
 end
