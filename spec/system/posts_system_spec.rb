@@ -14,17 +14,17 @@ RSpec.describe "Posts index page", type: :system do
     user_post
 
     visit root_path
-    expect(page).to have_text(user_post.body)
-    expect(page).to have_text(user_post.user.username)
+    expect(page).to have_content(user_post.body)
+    expect(page).to have_content(user_post.user.username)
   end
 
-  it "renders posts by user followings" do
+  it "renders posts by user followings (accepted)" do
     post = create(:post, user: another_user)
-    user.followings<<(another_user)
+    user.followed_users.create(following_id: another_user.id, status: 1)
 
     visit root_path
-    expect(page).to have_text(post.body)
-    expect(page).to have_text(post.user.username)
+    expect(page).to have_content(post.body)
+    expect(page).to have_content(post.user.username)
   end
 
   it "does not render posts from user followers" do
@@ -32,26 +32,26 @@ RSpec.describe "Posts index page", type: :system do
     user.followers<<(another_user)
 
     visit root_path
-    expect(page).to_not have_text(post.body)
-    expect(page).to_not have_text(post.user.username)
+    expect(page).to_not have_content(post.body)
+    expect(page).to_not have_content(post.user.username)
   end
 
   it "renders comments on post" do
     comment = create(:comment, user: another_user, post: user_post)
 
     visit root_path
-    expect(page).to have_text(comment.body)
+    expect(page).to have_content(comment.body)
   end
 
   it "renders like number when it is greater than 0" do
     user_post.likes.create(user: another_user)
 
     visit root_path
-    expect(page).to have_text(user_post.likes.count)
+    expect(page).to have_content(user_post.likes.count)
   end
 
   it "does not render like count when it is less than 1" do
     visit root_path
-    expect(page).to_not have_text(user_post.likes.count)
+    expect(page).to_not have_content(user_post.likes.count)
   end
 end
