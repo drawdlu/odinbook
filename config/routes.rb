@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks",
-                                    registrations: "users/registrations" }
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/omniauth_callbacks",
+    registrations: "users/registrations"
+  }
+
+  devise_scope :user do
+    get "sign_up_oauth", to: "users/registrations#new"
+  end
 
   root "posts#index"
 
