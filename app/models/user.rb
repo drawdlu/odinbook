@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  @@minimum_length = 4.freeze
+  @@maximum_length = 32.freeze
+  cattr_reader :maximum_length, :minimum_length
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,7 +28,7 @@ class User < ApplicationRecord
   has_many :commented_posts, through: :comments, source: "post"
 
   validates :username, presence: true, uniqueness: { case_sensitive: false },
-            length: { in: 4..32  },
+            length: { in: @@minimum_length..@@maximum_length  },
             format: { without: /\s/, message: "should not contain any whitespace" }
   validates :email, presence: true, uniqueness: true
 

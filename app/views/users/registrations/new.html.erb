@@ -4,7 +4,10 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :username %><br />
+    <%= f.label :username %>
+    <% if @minimum_username_length && @maximum_username_length %>
+    <em>(<%= @minimum_username_length %> to <%= @maximum_username_length %> characters long)</em>
+    <% end %><br />
     <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>
 
