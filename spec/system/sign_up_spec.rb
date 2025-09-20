@@ -28,6 +28,7 @@ RSpec.describe "Sign Up", type: :system do
       fill_in("Password", with: "1234")
       fill_in("Password confirmation", with: "1234")
       click_button "Sign up"
+      sleep 1
 
       expect(page).to have_content("Password is too short (minimum is 6 characters)")
       expect(page).to have_current_path(new_user_registration_path)
@@ -74,6 +75,34 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
 
       expect(page).to have_content("Password confirmation doesn't match Password")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+
+  context "when username length is invalid" do
+    it "fails and displays error message" do
+      invalid_username = "tes"
+      fill_in("Username", with: invalid_username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: user.password)
+      click_button "Sign up"
+
+      expect(page).to have_content("Username is too short (minimum is 4 characters)")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+
+  context "when username has a whitespace" do
+    it "fails and displays error message" do
+      invalid_username = "test test"
+      fill_in("Username", with: invalid_username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: user.password)
+      click_button "Sign up"
+
+      expect(page).to have_content("Username should not contain any whitespace")
       expect(page).to have_current_path(new_user_registration_path)
     end
   end

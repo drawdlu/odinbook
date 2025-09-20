@@ -23,7 +23,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :commented_posts, through: :comments, source: "post"
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :username, presence: true, uniqueness: { case_sensitive: false },
+            length: { in: 4..32  },
+            format: { without: /\s/, message: "should not contain any whitespace" }
   validates :email, presence: true, uniqueness: true
 
   scope :all_except, ->(user) { where.not(id: user) }

@@ -31,5 +31,24 @@ RSpec.describe User, type: :model do
         end.to raise_error(ActiveRecord::RecordNotUnique)
       end
     end
+
+    context "when username length is incorrect" do
+      it "will be invalid if it is less than 4" do
+        new_user = build(:user, username: "not")
+        expect(new_user).to_not be_valid
+      end
+
+      it "will be invalid if it is greater than 32" do
+        new_user = build(:user, username: Faker::Internet.username(specifier: 33))
+        expect(new_user).to_not be_valid
+      end
+    end
+
+    context "when username contains a whitespace" do
+      it "will be invalid" do
+        new_user = build(:user, username: "test test")
+        expect(new_user).to_not be_valid
+      end
+    end
   end
 end
