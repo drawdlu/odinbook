@@ -1,0 +1,80 @@
+require 'rails_helper'
+
+RSpec.describe "Sign Up", type: :system do
+  let(:user) { build(:user) }
+
+  before do
+    visit root_path
+    click_link "Sign up"
+  end
+
+  context "when all data is valid" do
+    it "successfully creates an account and logs in" do
+      fill_in("Username", with: user.username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: user.password)
+      click_button "Sign up"
+
+      expect(page).to have_content("Welcome! You have signed up successfully.")
+      expect(page).to have_current_path(root_path)
+    end
+  end
+
+  context "when password is too short" do
+    it "fails and prompts password too short" do
+      fill_in("Username", with: user.username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: "1234")
+      fill_in("Password confirmation", with: "1234")
+      click_button "Sign up"
+
+      expect(page).to have_content("Password is too short (minimum is 6 characters)")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+
+  context "when username or email has a duplicate" do
+    let(:email) { "test@mail.com" }
+    let(:username) { "test_name" }
+
+    before do
+      user.save
+    end
+
+    it "fails and prompts duplicate username" do
+      fill_in("Username", with: user.username)
+      fill_in("Email", with: email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: user.password)
+      click_button "Sign up"
+
+      expect(page).to have_content("Username has already been taken")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+
+    it "fails and prompts duplicate email" do
+      fill_in("Username", with: username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: user.password)
+      click_button "Sign up"
+
+      expect(page).to have_content("Email has already been taken")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+
+  context "when password does not match" do
+    it "fails and prompts password not match" do
+      fill_in("Username", with: user.username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: "will_not_match")
+      click_button "Sign up"
+
+      expect(page).to have_content("Password confirmation doesn't match Password")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+end
