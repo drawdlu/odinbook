@@ -46,17 +46,19 @@ class User < ApplicationRecord
     self.follower_users.find_by(follower_id: current_user.id).id
   end
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
-    user = User.find_by(email: data["email"])
+  def self.from_omniauth(auth)
+    user = User.find_by(email: auth.info.email)
 
-    # Uncomment the section below if you want users to be created if they don't exist
-    # unless user
-    #     user = User.create(
-    #       email: data["email"],
-    #       password: Devise.friendly_token[0, 20]
-    #     )
-    # end
+    unless user
+      user = User.new(
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20],
+        provider: auth.provider,
+        uid: auth.uid
+      )
+
+      user.save(validate: false)
+    end
 
     user
   end

@@ -108,7 +108,10 @@ RSpec.describe "Sign Up", type: :system do
   end
 
   context "when signing up using google auth" do
-    let(:user) { build(:user, email: "test@mail.com") }
+    let(:name) { "Bombadil" }
+    let(:user) { build(:user, email: "test@mail.com", username: "test") }
+    let!(:active_user) { create(:user, username: name) }
+
     before do
       mock_oauth_provider(:google_oauth2)
       visit root_path
@@ -119,17 +122,19 @@ RSpec.describe "Sign Up", type: :system do
       OmniAuth.config.test_mode = false
       OmniAuth.config.mock_auth[:google_oauth2] = nil
     end
-    it "displays sign up form with only sign up button" do
-      expect(page).to have_current_path(sign_up_oauth_path(email: user.email, oauth: true))
-    end
 
-    it "signs up successfully with valid inputs" do
+    it "signs up successfully with valid username" do
       fill_in("Username", with: user.username)
-      fill_in("Password", with: user.password)
-      fill_in("Password confirmation", with: user.password)
       click_button "Sign up"
 
       expect(page).to have_current_path(root_path)
+    end
+
+    it "fails and renders notice when username is invalid" do
+      fill_in("Username", with: name)
+      click_button "Sign up"
+
+      expect(page).to have_content("Username has already been taken")
     end
   end
 end

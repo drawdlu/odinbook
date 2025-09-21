@@ -1,0 +1,10 @@
+<h1>Username</h1>
+
+<%= form_with model: @user, url: usernames_user_path, method: :patch  do |f| %>
+    <% @user.errors.full_messages.each do |message| %>
+        <%= message %>
+    <% end %>
+    <%= f.label :username %>
+    <%= f.text_field :username, autofocus: true %>
+    <%= f.submit "Sign up" %>
+<% end %>

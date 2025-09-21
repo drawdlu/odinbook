@@ -4,8 +4,11 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  devise_scope :user do
-    get "sign_up_oauth", to: "users/registrations#new"
+  resources :users do
+    member do
+      get "usernames/edit", to: "users/usernames#edit"
+      patch "usernames", to: "users/usernames#update"
+    end
   end
 
   root "posts#index"

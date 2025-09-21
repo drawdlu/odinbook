@@ -8,13 +8,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         # You need to implement the method below in your model (e.g. app/models/user.rb)
         @user = User.from_omniauth(request.env["omniauth.auth"])
 
-        unless @user.nil?
+        if @user.username
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google"
           sign_in_and_redirect @user, event: :authentication
         else
           # Useful for debugging login failures. Uncomment for development.
           # session['devise.google_data'] = request.env['omniauth.auth'].except('extra') # Removing extra as it can overflow some session stores
-          redirect_to sign_up_oauth_path(email: request.env["omniauth.auth"].info.email, oauth: true) # , alert: @user.errors.full_messages.join("\n")
+          redirect_to usernames_edit_user_path(id: @user.id)
         end
   end
 

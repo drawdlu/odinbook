@@ -13,12 +13,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <% unless @oauth %>
-      <%= f.email_field :email, autocomplete: "email"%>
-    <% else %>
-      <%= f.email_field :email, value: @email || f.object.email, readonly: true%>
-      <%= hidden_field_tag :oauth, "true"%>
-    <% end %>
+    <%= f.email_field :email, autocomplete: "email"%>
   </div>
 
   <div class="field">
@@ -37,8 +32,7 @@
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
-<% end %>
 
-<% unless @oauth%>
   <%= render "devise/shared/links" %>
+
 <% end %>

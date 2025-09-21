@@ -8,19 +8,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @minimum_username_length = User.minimum_length
     @maximum_username_length = User.maximum_length
-    if params["oauth"] == "true"
-      build_resource(email: params["email"])
-      @email = resource.email
-      @oauth = true
-    end
+
     super
   end
 
   # POST /resource
-  def create
-    @oauth = params["oauth"] == "true"
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
