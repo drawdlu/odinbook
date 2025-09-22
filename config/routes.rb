@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :posts, except: [ :show, :new, :edit ]
+  resources :posts
   resources :users, only: [ :index ]
   resources :follows, only: [ :create, :destroy ]
 

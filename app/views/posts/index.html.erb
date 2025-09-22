@@ -1,7 +1,10 @@
 <h1>Index Posts</h1>
 
-<% @posts.each do |post| %>
-    <%= render "post", post: post %>
-    <br>
-    <br>
-<% end %>
+<%= turbo_frame_tag "new_post", src: new_post_path %>
+<br>
+
+<div id="posts">
+    <% @posts.each do |post| %>
+        <%= render post %>
+    <% end %>
+</div>
