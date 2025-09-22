@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :posts
+  resources :posts 
+  resources :likes, only: [ :create, :destroy ]
+
   resources :users, only: [ :index ]
   resources :follows, only: [ :create, :destroy ]
 

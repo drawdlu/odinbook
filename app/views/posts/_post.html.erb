@@ -7,8 +7,9 @@
             <%= post.body %>
         </div>
         <div class="likes">
-            <% likes = post.likes.count %>
-            <%= likes if likes > 0%>
+            <%= turbo_frame_tag "new_like_#{post.id}" do %>
+                <%= render "likes/like", post: post %>
+            <% end %>
         </div>
         <div class="line">
             ------------------------------------

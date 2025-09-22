@@ -46,6 +46,14 @@ class User < ApplicationRecord
     self.follower_users.find_by(follower_id: current_user.id).id
   end
 
+  def get_like_id(post)
+    self.likes.where(post_id: post.id).first.id
+  end
+
+  def likes_post?(post)
+    self.liked_posts.map(&:id).include?(post.id)
+  end
+
   def self.from_omniauth(auth)
     user = User.find_by(email: auth.info.email)
 
