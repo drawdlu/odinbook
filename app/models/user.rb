@@ -35,23 +35,15 @@ class User < ApplicationRecord
   scope :all_except, ->(user) { where.not(id: user) }
 
   def follower?(current_user)
-    self.followers.to_a.include?(current_user)
+    self.followers.exists?(current_user.id)
   end
 
   def pending_follower?(current_user)
-    self.pending_followers.to_a.include?(current_user)
+    self.pending_followers.exists?(current_user.id)
   end
 
   def follower_id(current_user)
     self.follower_users.find_by(follower_id: current_user.id).id
-  end
-
-  def get_like_id(post)
-    self.likes.where(post_id: post.id).first.id
-  end
-
-  def likes_post?(post)
-    self.liked_posts.map(&:id).include?(post.id)
   end
 
   def self.from_omniauth(auth)

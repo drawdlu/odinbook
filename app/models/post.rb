@@ -8,4 +8,12 @@ class Post < ApplicationRecord
   has_many :commenting_users, through: :comments, source: "user"
 
   validates :body, presence: true
+
+  def get_like_id(user)
+    user.likes.where(post_id: self.id).first.id
+  end
+
+  def liked_by?(user)
+    user.liked_posts.map(&:id).include?(self.id)
+  end
 end
