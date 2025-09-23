@@ -35,6 +35,20 @@ RSpec.describe "Sign Up", type: :system do
     end
   end
 
+  context "when password doesn't contain a symbol" do
+    it "fails and prompts password requirements" do
+      fill_in("Username", with: user.username)
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: "1234")
+      fill_in("Password confirmation", with: "1234aS34")
+      click_button "Sign up"
+      sleep 1
+
+      expect(page).to have_content("Password must contain a lowercase and an uppercase letter, a symbol, and a number.")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+
   context "when username or email has a duplicate" do
     let(:email) { "test@mail.com" }
     let(:username) { "test_name" }

@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   @@minimum_length = 4.freeze
   @@maximum_length = 32.freeze
-  cattr_reader :maximum_length, :minimum_length
+  @@minimum_password_length = 8.freeze
+  cattr_reader :maximum_length, :minimum_length, :minimum_password_length
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,7 +10,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   # Users that this user is following
   has_many :followed_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
@@ -31,6 +32,9 @@ class User < ApplicationRecord
             length: { in: @@minimum_length..@@maximum_length  },
             format: { without: /\s/, message: "should not contain any whitespace" }
   validates :email, presence: true, uniqueness: true
+  validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W]).*\z/,
+                        message: "must contain a lowercase and an uppercase letter, a symbol, and a number." }
+
 
   scope :all_except, ->(user) { where.not(id: user) }
 
