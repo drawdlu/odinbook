@@ -5,18 +5,9 @@
         <% @users.each do |user| %>
             <div class="user">
                 <%= user.username %>
-                <% if user.follower?(current_user) %>
-                    <%= link_to "Unfollow", 
-                    follow_path(id: user.follower_id(current_user)),
-                    data: { turbo_method: :delete }%>
-                <% elsif user.pending_follower?(current_user) %>
-                    <%= link_to "Cancel Request", 
-                    follow_path(id: user.follower_id(current_user)),
-                    data: { turbo_method: :delete }%>
-                <% else %>
-                    <%= link_to "Follow", follows_path(following_id: user.id), 
-                    data: { turbo_method: :post }%>
-                <% end %>
+            <%= turbo_frame_tag "follow_#{user.id}" do %>
+                <%= render "follows/links", user: user %>
+            <% end %>
             </div>
             <br>
         <% end %>
