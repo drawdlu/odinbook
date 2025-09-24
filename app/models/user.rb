@@ -28,9 +28,12 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :commented_posts, through: :comments, source: "post"
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false },
+  validates :username, presence: true
+  validates :username, uniqueness: { case_sensitive: false },
             length: { in: @@minimum_length..@@maximum_length  },
-            format: { without: /\s/, message: "should not contain any whitespace" }
+            format: { without: /\s/, message: "should not contain any whitespace" },
+            if: -> { username.present? }
+
   validates :email, presence: true, uniqueness: true
   validate :password_complexity, if: :password_required?
 

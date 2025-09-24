@@ -13,9 +13,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @minimum_username_length = User.minimum_length
+    @maximum_username_length = User.maximum_length
+
+    super
+  end
 
   # GET /resource/edit
   # def edit

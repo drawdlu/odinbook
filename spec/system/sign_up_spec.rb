@@ -107,6 +107,19 @@ RSpec.describe "Sign Up", type: :system do
     end
   end
 
+  context "when username is blank" do
+    it "shows only blank error" do
+      fill_in("Email", with: user.email)
+      fill_in("Password", with: user.password)
+      fill_in("Password confirmation", with: user.password)
+      click_button "Sign up"
+
+      expect(page).to have_content("Username can't be blank")
+      expect(page).to_not have_content("Username is too short (minimum is 4 characters)")
+      expect(page).to have_current_path(new_user_registration_path)
+    end
+  end
+
   context "when username has a whitespace" do
     it "fails and displays error message" do
       invalid_username = "test test"
