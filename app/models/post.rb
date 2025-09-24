@@ -16,4 +16,8 @@ class Post < ApplicationRecord
   def liked_by?(user)
     user.liked_posts.map(&:id).include?(self.id)
   end
+
+  def own_post(user)
+    self.user_id == user.id
+  end
 end

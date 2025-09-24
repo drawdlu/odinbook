@@ -15,14 +15,12 @@
             ------------------------------------
         </div>
         <div class="comments">
-            <% post.comments.each do |comment| %>
-                <div class="author">
-                    <%= comment.user.username %>
-                </div>
-                <div class="body">
-                    <%= comment.body %>
-                </div>
-            <% end %>
+                <%= turbo_frame_tag "comments_#{post.id}" do %>
+                    <% post.comments.each do |comment| %>
+                        <%= render comment, post: post %>
+                    <% end %>
+                <% end %>
+            <%= turbo_frame_tag "new_comment_#{post.id}", src: new_post_comment_path(post_id: post.id) %>
         </div>
         <br>
         <br>

@@ -3,4 +3,8 @@ class Comment < ApplicationRecord
   belongs_to :user
 
   validates :body, presence: true
+
+  def own_comment(user)
+    self.user_id == user.id
+  end
 end
