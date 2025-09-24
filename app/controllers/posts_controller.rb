@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  include RequiresUsername
 
   def index
     user_ids = current_user.followings.map(&:id) << current_user.id

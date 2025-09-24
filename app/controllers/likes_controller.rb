@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!
+  include RequiresUsername
 
   def new
     @like = Like.new

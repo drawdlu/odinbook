@@ -30,7 +30,7 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
       sleep 1
 
-      expect(page).to have_content("Password is too short (minimum is 6 characters)")
+      expect(page).to have_content("Password is too short (minimum is 8 characters)")
       expect(page).to have_current_path(new_user_registration_path)
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
       sleep 1
 
-      expect(page).to have_content("Password must contain a lowercase and an uppercase letter, a symbol, and a number.")
+      expect(page).to have_content("Password must include a symbol")
       expect(page).to have_current_path(new_user_registration_path)
     end
   end

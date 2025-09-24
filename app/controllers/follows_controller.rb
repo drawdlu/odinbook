@@ -1,6 +1,5 @@
 class FollowsController < ApplicationController
-  before_action :authenticate_user!
-
+  include RequiresUsername
   def create
     @user = User.find(follow_params[:following_id])
     @follow = current_user.followed_users.build(follow_params)

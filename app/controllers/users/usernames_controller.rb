@@ -7,9 +7,10 @@ module Users
 
     def update
       @user = User.find(params[:id])
+      new = @user.username == nil ? true : false
 
       if @user.update(username_params)
-        redirect_user @user
+        redirect_user(@user, new)
       else
         render :edit, status: :unprocessable_content
       end

@@ -1,10 +1,10 @@
 module UsernamesHelper
-  def redirect_user(user)
-    if user_signed_in?
-      # redirect to profile page, which does not exist yet
-    else
+  def redirect_user(user, new)
+    if new
       flash[:notice] = "Successfully signed up using Google"
-      sign_in_and_redirect user, event: :authentication
+      redirect_to root_path
+    else
+      # redirect to profile page, does not exist yet
     end
   end
 end

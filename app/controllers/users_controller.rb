@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  include RequiresUsername
 
   def index
     @users = User.includes(:followers, :follower_users).all_except(current_user)

@@ -32,8 +32,7 @@ class User < ApplicationRecord
             length: { in: @@minimum_length..@@maximum_length  },
             format: { without: /\s/, message: "should not contain any whitespace" }
   validates :email, presence: true, uniqueness: true
-  validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_\W]).*\z/,
-                        message: "must contain a lowercase and an uppercase letter, a symbol, and a number." }
+  validate :password_complexity, if: :password_required?
 
 
   scope :all_except, ->(user) { where.not(id: user) }
@@ -65,5 +64,24 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  def password_required?
+    # No password required for OAuth users
+    return false if provider.present?
+
+    # Require password only when:
+    # - New record (sign up)
+    # - Or password fields are being changed
+    !persisted? || password.present? || password_confirmation.present?
+  end
+
+  def password_complexity
+    return if password.blank?
+
+    errors.add :password, "must include an uppercase letter" unless password.match?(/[A-Z]/)
+    errors.add :password, "must include a lowercase letter" unless password.match?(/[a-z]/)
+    errors.add :password, "must include a symbol" unless password.match?(/[_\W]/)
+    error.add :password, "must include a digit" unless password.match?(/[\d]/)
   end
 end
