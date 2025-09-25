@@ -15,7 +15,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           # Useful for debugging login failures. Uncomment for development.
           # session['devise.google_data'] = request.env['omniauth.auth'].except('extra') # Removing extra as it can overflow some session stores
           sign_in @user, event: :authentication
-          redirect_to usernames_edit_user_path(id: @user.id)
+          redirect_to edit_username_path
         end
   end
 

@@ -4,14 +4,10 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  resources :users do
-    member do
-      get "usernames/edit", to: "users/usernames#edit"
-      patch "usernames", to: "users/usernames#update"
-    end
-  end
-
   root "posts#index"
+
+  resources :users, only: [ :index ]
+  resource :username, only: [ :edit, :update ], controller: "users/usernames"
 
   resources :posts do
     resources :comments
@@ -19,7 +15,6 @@ Rails.application.routes.draw do
 
   resources :likes, only: [ :create, :destroy ]
 
-  resources :users, only: [ :index ]
   resources :follows, only: [ :create, :destroy ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

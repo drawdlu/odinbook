@@ -1,12 +1,14 @@
 module Users
   class UsernamesController < ApplicationController
     include UsernamesHelper
+    skip_before_action :has_username
+
     def edit
-      @user = User.find(params[:id])
+      @user = current_user
     end
 
     def update
-      @user = User.find(params[:id])
+      @user = current_user
       new = @user.username == nil ? true : false
 
       if @user.update(username_params)

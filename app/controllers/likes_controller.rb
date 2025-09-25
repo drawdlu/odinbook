@@ -1,6 +1,4 @@
 class LikesController < ApplicationController
-  include RequiresUsername
-
   def new
     @like = Like.new
   end

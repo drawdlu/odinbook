@@ -23,7 +23,8 @@
   </head>
 
   <body>
-    <% if user_signed_in? && !current_user.username.nil? %>
+    <%# if user_signed_in? && current_user.reload.username.present? %>
+    <% if @show_nav %>
       <div class="navigation">
         <% if user_signed_in? %>
           <div class="home">

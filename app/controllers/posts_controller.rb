@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  include RequiresUsername
-
   def index
     user_ids = current_user.followings.map(&:id) << current_user.id
     @posts = Post.includes(:user, :comments, :likes).where(user_id: user_ids).reverse_order
