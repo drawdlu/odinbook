@@ -76,6 +76,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+  config.include SystemHelpers, type: :system
 
   # capybara chrome headless
   config.before(:each, type: :system) do

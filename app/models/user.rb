@@ -52,6 +52,10 @@ class User < ApplicationRecord
     self.follower_users.find_by(follower_id: current_user.id).id
   end
 
+  def follow_requests
+    follower_users.where("status = ?", 0)
+  end
+
   def self.from_omniauth(auth)
     user = User.find_by(email: auth.info.email)
 
