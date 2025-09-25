@@ -1,0 +1,8 @@
+<h1>Followers</h1>
+
+<% @followers.each do |follow| %>
+    <%= follow.follower.username %>
+    <%= turbo_frame_tag "follower_link_#{follow.id}" do %>
+        <%= render "follower_links", followed: @followed_user, follower: follow.follower%>
+    <% end %>
+<% end %>

@@ -1,0 +1,15 @@
+<% if current_user == followed %>
+    <% if follower.follower?(followed) %>
+        <%= link_to "Unfollow", user_follower_path(id: follower.follower_id(followed),
+                                                    follow_id: followed.follower_id(follower)), 
+                                data: { turbo_method: :delete } %>
+    <% elsif follower.pending_follower?(followed) %>
+        <%= link_to "Cancel Request", user_follower_path(id: follower.follower_id(followed),
+                                                    follow_id: followed.follower_id(follower)), 
+                                data: { turbo_method: :delete } %>
+    <% else %>
+        <%= link_to "Follow back", user_followers_path(follower_id: follower.id, 
+                                                        follow_id: followed.follower_id(follower)), 
+                                    data: {turbo_method: :post} %>
+    <% end %>
+<% end %>

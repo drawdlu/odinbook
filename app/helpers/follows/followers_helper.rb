@@ -1,0 +1,2 @@
+module Follows::FollowersHelper
+end

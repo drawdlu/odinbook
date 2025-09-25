@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :users, only: [ :index ]
+  resources :users, only: [ :index ] do
+    resources :followers, only: [ :index, :create, :destroy ], controller: "follows/followers"
+  end
   resource :username, only: [ :edit, :update ], controller: "users/usernames"
   resources :follow_requests, only: [ :index, :update, :destroy ], controller: "follows/follow_requests"
 

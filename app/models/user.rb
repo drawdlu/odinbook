@@ -48,12 +48,16 @@ class User < ApplicationRecord
     self.pending_followers.exists?(current_user.id)
   end
 
-  def follower_id(current_user)
-    self.follower_users.find_by(follower_id: current_user.id).id
+  def follower_id(follower)
+    self.follower_users.find_by(follower_id: follower.id).id
   end
 
   def follow_requests
     follower_users.where("status = ?", 0)
+  end
+
+  def follower_instances
+    follower_users.where("status = ?", 1)
   end
 
   def self.from_omniauth(auth)

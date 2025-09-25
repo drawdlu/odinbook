@@ -1,0 +1,2 @@
+<%= turbo_stream.update "follower_link_#{@follow_reference.id}", partial: "follower_links", 
+    locals: { follower: @follow_reference.follower, followed: @follow_reference.following }%>

@@ -10,7 +10,7 @@ RSpec.describe "FollowRequests", type: :system do
     click_link "Follow Requests"
   end
 
-  describe "accepting a request" do
+  context "accepting a request" do
     it "removes link and prints accepted" do
       click_link "Accept"
 
@@ -18,7 +18,7 @@ RSpec.describe "FollowRequests", type: :system do
     end
   end
 
-  describe "denying a request" do
+  context "denying a request" do
     it "removes link and prints denied" do
       click_link "Deny"
 

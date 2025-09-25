@@ -5,4 +5,6 @@ class Follow < ApplicationRecord
   enum :status, { pending: 0, accepted: 1 }
 
   validates :follower_id, uniqueness: { scope: :following_id }
+
+  scope :follower_instances, ->(user) { find_by("status = ?, following_id = ?", 1, user.id) }
 end
