@@ -60,6 +60,10 @@ class User < ApplicationRecord
     follower_users.where("status = ?", 1)
   end
 
+  def following_instances
+    followed_users.where("status = ?", 1)
+  end
+
   def self.from_omniauth(auth)
     user = User.find_by(email: auth.info.email)
 

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [ :index ] do
     resources :followers, only: [ :index, :create, :destroy ], controller: "follows/followers"
+    resources :followings, only: [ :index ], controller: "follows/followings"
   end
   resource :username, only: [ :edit, :update ], controller: "users/usernames"
   resources :follow_requests, only: [ :index, :update, :destroy ], controller: "follows/follow_requests"
