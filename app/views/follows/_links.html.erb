@@ -1,3 +1,9 @@
+<% if current_user.follower?(user) %>
+    <% follow = "Follow back" %>
+<% else %>
+    <% follow = "Follow" %>
+<% end %>
+
 <% if user.follower?(current_user) %>
     <%= link_to "Unfollow", 
     follow_path(id: user.follower_id(current_user)),
@@ -7,6 +13,6 @@
     follow_path(id: user.follower_id(current_user)),
     data: { turbo_method: :delete }%>
 <% else %>
-    <%= link_to "Follow", follows_path(following_id: user.id), 
+    <%= link_to follow, follows_path(following_id: user.id), 
     data: { turbo_method: :post }%>
 <% end %>
