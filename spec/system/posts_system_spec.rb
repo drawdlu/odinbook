@@ -7,7 +7,7 @@ RSpec.describe "Posts index page", type: :system do
 
   before do
     driven_by(:rack_test)
-    sign_in user
+    login_as(user)
   end
 
   it "renders posts by user" do
