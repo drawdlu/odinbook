@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  after_create :broadcast_post
+
   has_many :likes, dependent: :destroy
   has_many :user_likes, through: :likes, source: "user"
 
@@ -19,5 +21,14 @@ class Post < ApplicationRecord
 
   def own_post(user)
     self.user_id == user.id
+  end
+
+  def broadcast_post
+    broadcast_prepend_to(
+      "post",
+      target: "posts",
+      partial: "posts/post",
+      locals: { post: self }
+    )
   end
 end
