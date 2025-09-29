@@ -11,6 +11,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
   has_many :posts, dependent: :destroy
+  has_one :profile
 
   # Users that this user is following
   has_many :followed_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
@@ -49,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def follower_id(follower)
-    self.follower_users.find_by(follower_id: follower.id).id
+    self.follower_users.find_by(follower_id: follower.id)&.id
   end
 
   def follow_requests
@@ -82,12 +83,7 @@ class User < ApplicationRecord
   end
 
   def password_required?
-    # No password required for OAuth users
     return false if provider.present?
-
-    # Require password only when:
-    # - New record (sign up)
-    # - Or password fields are being changed
     !persisted? || password.present? || password_confirmation.present?
   end
 
@@ -97,6 +93,6 @@ class User < ApplicationRecord
     errors.add :password, "must include an uppercase letter" unless password.match?(/[A-Z]/)
     errors.add :password, "must include a lowercase letter" unless password.match?(/[a-z]/)
     errors.add :password, "must include a symbol" unless password.match?(/[_\W]/)
-    error.add :password, "must include a digit" unless password.match?(/[\d]/)
+    errors.add :password, "must include a digit" unless password.match?(/[\d]/)
   end
 end
