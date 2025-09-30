@@ -1,0 +1,7 @@
+<% if defined?(current_user) && post.liked_by?(current_user) %>
+    <%= link_to "Unlike", 
+        like_path(id: post.get_like_id(current_user), post_id: post.id), 
+        data: { turbo_method: :delete, turbo_stream: true } %>
+<% else %>
+    <%= link_to "Like", likes_path(post_id: post.id), data: { turbo_method: :post, turbo_stream: true } %>
+<% end %>

@@ -27,7 +27,7 @@ class Post < ApplicationRecord
     broadcast_prepend_to(
       "post",
       target: "posts",
-      partial: "posts/post",
+      partial: "posts/post_template",
       locals: { post: self }
     )
   end

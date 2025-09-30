@@ -7,16 +7,19 @@
             <%= post.body %>
         </div>
         <div class="likes">
-            <%= render "likes/like", post: post %>
+            <%= turbo_stream_from "like" %>
+            <%= turbo_frame_tag "like_count_#{post.id}" do %>
+                <%= render "likes/like_count", post: post %>
+            <% end %>
+            <%= turbo_frame_tag "new_like_#{post.id}" do %>
+                <%= link_to "Like", likes_path(post_id: post.id), data: { turbo_method: :post, turbo_stream: true } %>
+            <% end %>
         </div>
         <div class="line">
             ------------------------------------
         </div>
         <div class="comments">
             <%= turbo_frame_tag "comments_#{post.id}" do %>
-                <% post.comments.each do |comment| %>
-                    <%= render comment, post: post %>
-                <% end %>
             <% end %>
             <%= turbo_frame_tag "new_comment_#{post.id}", src: new_post_comment_path(post_id: post.id) %>
         </div>
