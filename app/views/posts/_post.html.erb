@@ -12,10 +12,10 @@
         <div class="line">
             ------------------------------------
         </div>
-        <%= turbo_stream_from "comment" %>
+        <%= turbo_stream_from "comments_stream_#{post.id}" %>
         <div class="comments">
             <%= turbo_frame_tag "comments_#{post.id}" do %>
-                <% post.comments.each do |comment| %>
+                <% post.comments.reverse.each do |comment| %>
                     <%= render comment, post: post %>
                 <% end %>
             <% end %>

@@ -20,7 +20,11 @@ class Post < ApplicationRecord
   end
 
   def own_post(user)
-    self.user_id == user.id
+    user.present? && self.user_id == user.id
+  end
+
+  def allowed_users
+    self.user.followers
   end
 
   def broadcast_post

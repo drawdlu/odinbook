@@ -22,7 +22,11 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
 
-    @comment.delete
+    unless @comment.user == current_user || @post.user == current_user
+      head :forbidden and return
+    end
+
+    @comment.destroy
 
     respond_to do |format|
       format.turbo_stream

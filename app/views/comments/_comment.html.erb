@@ -1,9 +1,8 @@
-<%= turbo_frame_tag "comment_#{comment.id}" do %>
-    <div class="comment">
-        <%= comment.user.username %>: <%= comment.body %>
-        <% if comment.own_comment(Current.user) || post.own_post(Current.user) %>
-            <%= link_to "Delete", post_comment_path(post_id: post.id, id: comment.id),
-                data: { turbo_method: :delete }%>
-        <% end %>
-    </div>
-<% end %>
+<div id="<%= dom_id(comment) %>" class="comment">
+    <%= comment.user.username %>: <%= comment.body %>
+    <% if comment.own_comment(current_user) || post.own_post(current_user) %>
+        <%= link_to "Delete", post_comment_path(post_id: post.id, id: comment.id),
+            data: { turbo_method: :delete, turbo_stream: true }%>
+    <% end %>
+</div>
+
