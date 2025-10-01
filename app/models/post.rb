@@ -28,11 +28,21 @@ class Post < ApplicationRecord
   end
 
   def broadcast_post
-    broadcast_prepend_to(
-      "post",
-      target: "posts",
-      partial: "posts/post_template",
-      locals: { post: self }
-    )
+    get_user_stream(self).each do |user|
+      PostChannel.broadcast_to(
+        user,
+        { html: ApplicationController.render(
+          partial: "posts/post_template",
+          locals: { post: self }
+        ) }
+      )
+    end
+  end
+
+  private
+
+  def get_user_stream(post)
+    user = post.user
+    user.followers + [ user ]
   end
 end
