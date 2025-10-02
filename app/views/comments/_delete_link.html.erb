@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "comment_delete_#{comment.id}" do %>
+    <% if comment.can_delete?(Current.user) %>
+        <%= link_to "Delete", post_comment_path(post_id: post.id, id: comment.id),
+            data: { turbo_method: :delete, turbo_stream: true }%>
+    <% end %>
+<% end %>

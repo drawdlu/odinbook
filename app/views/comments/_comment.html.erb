@@ -1,8 +1,7 @@
 <div id="<%= dom_id(comment) %>" class="comment">
     <%= comment.user.username %>: <%= comment.body %>
-    <% if comment.own_comment(current_user) || post.own_post(current_user) %>
-        <%= link_to "Delete", post_comment_path(post_id: post.id, id: comment.id),
-            data: { turbo_method: :delete, turbo_stream: true }%>
-    <% end %>
+    <%= turbo_frame_tag "comment_delete_#{comment.id}",
+        src: delete_button_post_comment_path(id: comment.id, post_id: post.id),
+        loading: :lazy %>
 </div>
 

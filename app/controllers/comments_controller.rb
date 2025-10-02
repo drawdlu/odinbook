@@ -34,6 +34,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def delete_button
+    @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id])
+    render partial: "comments/delete_link", locals: { comment: @comment, post: @post }
+  end
+
   private
 
   def comment_params

@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :follow_requests, only: [ :index, :update, :destroy ], controller: "follows/follow_requests"
 
   resources :posts do
-    resources :comments
+    resources :comments do
+      member do
+        get :delete_button
+      end
+    end
   end
 
   resources :likes, only: [ :create, :destroy ]
