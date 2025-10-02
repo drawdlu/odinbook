@@ -1,4 +1,4 @@
-class PostChannel < ApplicationCable::Channel
+class PostsChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
     stream_for current_user

@@ -1,6 +1,6 @@
 import consumer from "channels/consumer"
 
-consumer.subscriptions.create("PostChannel", 
+consumer.subscriptions.create("PostsChannel", 
   {
     connected() {
       // Called when the subscription is ready for use on the server

@@ -31,7 +31,7 @@ class Post < ApplicationRecord
 
   def broadcast_post
     get_user_stream(self).each do |user|
-      PostChannel.broadcast_to(
+      PostsChannel.broadcast_to(
         user,
         { html: ApplicationController.render(
           partial: "posts/post_template",
