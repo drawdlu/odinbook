@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  include Streamable
+
   belongs_to :user
 
   after_create :broadcast_post
@@ -37,12 +39,5 @@ class Post < ApplicationRecord
         ) }
       )
     end
-  end
-
-  private
-
-  def get_user_stream(post)
-    user = post.user
-    user.followers + [ user ]
   end
 end
