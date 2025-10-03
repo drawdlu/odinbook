@@ -1,8 +1,12 @@
 class User < ApplicationRecord
+  require "digest"
+
   @@minimum_length = 4.freeze
   @@maximum_length = 32.freeze
   @@minimum_password_length = 8.freeze
   cattr_reader :maximum_length, :minimum_length, :minimum_password_length
+
+  after_create_commit :set_profile_image
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -77,5 +81,20 @@ class User < ApplicationRecord
     errors.add :password, "must include a lowercase letter" unless password.match?(/[a-z]/)
     errors.add :password, "must include a symbol" unless password.match?(/[_\W]/)
     errors.add :password, "must include a digit" unless password.match?(/[\d]/)
+  end
+
+  def set_profile_image
+    if self.profile.nil?
+      self.create_profile(image: gravatar_url(self.email))
+    elsif self.profile.image.nil?
+      self.profile.update(image: gravatar_url(self.email))
+    end
+  end
+
+  private
+
+  def gravatar_url(email)
+    hash = Digest::MD5.hexdigest(email.strip.downcase)
+    "https://0.gravatar.com/avatar/#{hash}"
   end
 end

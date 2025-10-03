@@ -51,4 +51,11 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "profile image creation" do
+    let(:user) { create(:user) }
+    it "creates a profile image from gravatar" do
+      expect(user.profile.image).to_not be_nil
+    end
+  end
 end
