@@ -15,7 +15,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
   has_many :posts, dependent: :destroy
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
   # Users that this user is following
   has_many :followed_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy

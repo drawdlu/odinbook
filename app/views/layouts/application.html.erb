@@ -30,6 +30,9 @@
           <div class="home">
             <%= link_to "Home", root_path %>
           </div>
+          <div class="profile">
+            <%= link_to "Profile", user_profile_path(current_user) %>
+          </div>
           <div class="users">
             <%= link_to "Users", users_path %>
           </div>
