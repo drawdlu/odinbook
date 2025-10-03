@@ -65,23 +65,6 @@ class User < ApplicationRecord
     followed_users.where("status = ?", 1)
   end
 
-  def self.from_omniauth(auth)
-    user = User.find_by(email: auth.info.email)
-
-    unless user
-      user = User.new(
-        email: auth.info.email,
-        password: Devise.friendly_token[0, 20],
-        provider: auth.provider,
-        uid: auth.uid
-      )
-
-      user.save(validate: false)
-    end
-
-    user
-  end
-
   def password_required?
     return false if provider.present?
     !persisted? || password.present? || password_confirmation.present?
