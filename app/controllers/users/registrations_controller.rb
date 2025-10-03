@@ -17,7 +17,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @minimum_username_length = User.minimum_length
     @maximum_username_length = User.maximum_length
 
-    super
+    super do |user|
+      if user.persisted?
+        UserMailer.with(user: user).welcome_email.deliver_later
+      end
+    end
   end
 
   # GET /resource/edit
