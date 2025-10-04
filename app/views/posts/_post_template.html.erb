@@ -3,8 +3,12 @@
         <div class="author">
             <%= post.user.username %>
         </div>
-        <div class="body">
-            <%= post.body %>
+        <div class="content">
+            <% if post.postable_type == "Picture" %>
+                <%= image_tag url_for(post.postable.content.variant(resize_to_limit: [nil, 400])), alt: post.postable.alt %>
+            <% else %>
+                <%= post.postable.content %>
+            <% end %>
         </div>
         <div class="likes">
             <%= turbo_stream_from "like" %>

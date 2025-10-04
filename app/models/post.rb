@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   include Streamable
 
   belongs_to :user
+  belongs_to :postable, polymorphic: true
 
   after_create :broadcast_post
 
@@ -10,10 +11,6 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :commenting_users, through: :comments, source: "user"
-
-  has_one_attached :image, dependent: :destroy
-
-  validates :body, presence: true
 
   def get_like_id(user)
     user.likes.where(post_id: self.id).first.id

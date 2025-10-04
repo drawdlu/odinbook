@@ -9,7 +9,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.build
+    if post_params[:image]
+      @post.postable = Picture.new(content: post_params[:image], alt: post_params[:content])
+    else
+      @post.postable = Text.new(post_params)
+    end
 
     respond_to do |format|
       if @post.save
@@ -24,6 +29,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :image)
+    params.require(:post).permit(:content, :image)
   end
 end

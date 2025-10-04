@@ -3,7 +3,7 @@
         <% post.errors.full_messages.each do |message| %>
             <%= message %>
         <% end %>
-        <%= f.text_field :body %>
+        <%= f.text_field :content %>
         <%= f.file_field :image, direct_upload: true%>
         <%= f.submit "Post" %>
     <% end %>
