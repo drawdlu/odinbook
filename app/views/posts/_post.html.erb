@@ -6,6 +6,14 @@
         <div class="body">
             <%= post.body %>
         </div>
+        <% if post.image.attached? %>
+            <div class="image">
+                <%= image_tag post.image.variant(resize_to_limit: [nil, 500]) %>
+            </div>
+        <% end %>
+        <div class="image">
+
+        </div>
         <div class="likes">
             <%= render "likes/like", post: post %>
         </div>

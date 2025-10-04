@@ -4,6 +4,7 @@
             <%= message %>
         <% end %>
         <%= f.text_field :body %>
+        <%= f.file_field :image, direct_upload: true%>
         <%= f.submit "Post" %>
     <% end %>
 <% end %>
