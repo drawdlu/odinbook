@@ -1,12 +1,10 @@
 <h1>Follow Requests</h1>
 
-<% @follow_requests.each do |follow| %>
-    
-    <%= follow.follower.username %>
-    <%= turbo_frame_tag "follow_link_#{follow.id}" do %>
-        <%= link_to "Accept", follow_request_path(id: follow.id),
-                data: { turbo_method: :patch }%> /
-        <%= link_to "Deny", follow_request_path(id: follow.id), 
-                data: { turbo_method: :delete } %>
+<%= turbo_stream_from "follow_request_stream_#{current_user.id}" %>
+
+<div id="follow_requests_<%= current_user.id %>">
+    <% @follow_requests.each do |follow| %>
+        <%= render "name_links", follow: follow %>
     <% end %>
-<% end %>
+</div>
+

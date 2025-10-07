@@ -1,0 +1,9 @@
+<div id="follow_<%= follow.id %>" >
+        <%= follow.follower.username %>
+        <%= turbo_frame_tag "follow_link_#{follow.id}" do %>
+        <%= link_to "Accept", follow_request_path(id: follow.id),
+                data: { turbo_method: :patch }%> /
+        <%= link_to "Deny", follow_request_path(id: follow.id), 
+                data: { turbo_method: :delete } %>
+        <% end %>
+</div>
