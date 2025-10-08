@@ -2,12 +2,11 @@
 
 <div class="users">
     <div class="container">
+        <%= turbo_stream_from "user_index_#{current_user.id}" %>
         <% @users.each do |user| %>
             <div class="user">
                 <%= user.username %>
-            <%= turbo_frame_tag "follow_#{user.id}" do %>
-                <%= render "follows/links", user: user %>
-            <% end %>
+                <%= render "follows/follow_link", user: user %>
             </div>
             <br>
         <% end %>

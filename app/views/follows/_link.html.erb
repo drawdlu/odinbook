@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "user_link_#{user_id}",
+        src: links_follow_path(id: follow_id, user_id: user_id ),
+        loading: :lazy %>

@@ -21,6 +21,12 @@ class FollowsController < ApplicationController
     end
   end
 
+  def links
+    user = User.find(params[:user_id])
+
+    render partial: "follow_link", locals: { user: user }
+  end
+
   private
 
   def follow_params

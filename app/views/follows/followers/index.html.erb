@@ -1,8 +1,9 @@
 <h1>Followers</h1>
 
+<%= turbo_stream_from "followers_#{current_user.id}" %>
 <% @followers.each do |follow| %>
-    <%= follow.follower.username %>
-    <%= turbo_frame_tag "follow_#{follow.follower.id}" do %>
-        <%= render "follows/links", user: follow.follower %>
-    <% end %>
+    <div id="follow_<%= follow.id %>" >
+        <%= follow.follower.username %>
+        <%= render "follows/follow_link", user: follow.follower %>
+    </div>
 <% end %>

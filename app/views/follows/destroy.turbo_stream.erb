@@ -1,1 +1,2 @@
-<%= turbo_stream.update "follow_#{@user.id}", partial: "links", locals: { user: @user } %>
+<%# turbo_stream.update "follow_#{@user.id}", partial: "follow_link", locals: { user: @user } %>
+<%= turbo_stream.update "user_link_#{@user.id}", partial: "follow_link", locals: { user: @user } %>
