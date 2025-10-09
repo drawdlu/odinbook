@@ -4,6 +4,7 @@ class Follow < ApplicationRecord
 
   after_create :add_follow_request
   after_destroy :remove_follow
+  after_update :add_follower_following
 
   enum :status, { pending: 0, accepted: 1 }
 
@@ -24,13 +25,58 @@ class Follow < ApplicationRecord
     if self.status == "accepted"
       remove_from_followers
       remove_from_following
-      update_user_link
+      update_user_link_on_unfollow
     else
       remove_from_requests
+      update_user_link
+      update_follower_page
     end
   end
 
+  def add_follower_following
+    add_follower
+    add_following
+    update_user_link
+    update_follower_page
+  end
+
   private
+
+  def add_follower
+    broadcast_prepend_to(
+      "followers_#{self.following_id}",
+      target: "follower-list",
+      partial: "follows/follower_template",
+      locals: { follow: self }
+    )
+  end
+
+  def add_following
+    broadcast_prepend_to(
+      "following_#{self.follower_id}",
+      target: "following-list",
+      partial: "follows/following_template",
+      locals: { follow: self }
+    )
+  end
+
+  def update_user_link
+    broadcast_update_to(
+      "user_index_#{self.follower_id}",
+      target: "user_link_#{self.following_id}",
+      partial: "follows/link",
+      locals: { user_id: self.following.id, follow_id: self.id }
+    )
+  end
+
+  def update_follower_page
+    broadcast_update_to(
+      "followers_#{self.follower_id}",
+      target: "user_link_#{self.following_id}",
+      partial: "follows/link",
+      locals: { user_id: self.following.id, follow_id: self.id }
+    )
+  end
 
   def remove_from_requests
     broadcast_remove_to(
@@ -53,7 +99,7 @@ class Follow < ApplicationRecord
     )
   end
 
-  def update_user_link
+  def update_user_link_on_unfollow
     # updates Follow or Follow Back only, not when link is Unfollow
     return if self.follower.follower?(self.following)
 
