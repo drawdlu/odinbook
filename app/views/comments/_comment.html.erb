@@ -1,7 +1,7 @@
 <div id="<%= dom_id(comment) %>" class="comment">
     <%= comment.user.username %>: <%= comment.body %>
-    <%= turbo_frame_tag "comment_delete_#{comment.id}",
-        src: delete_button_post_comment_path(id: comment.id, post_id: post.id),
-        loading: :lazy %>
+    <%= turbo_frame_tag "comment_delete_#{comment.id}" do %>
+        <% render "comments/delete_link", comment: comment, post: comment.post%>
+    <% end %>
 </div>
 

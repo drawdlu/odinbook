@@ -22,7 +22,7 @@ class Comment < ApplicationRecord
     broadcast_prepend_later_to(
       "comments_stream_#{self.post.id}",
       target: "comments_#{self.post.id}",
-      partial: "comments/comment",
+      partial: "comments/comment_template",
       locals: { post: self.post, comment: self }
     )
   end
