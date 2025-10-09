@@ -3,6 +3,8 @@
 <%= turbo_frame_tag "new_post", src: new_post_path %>
 <br>
 
+<%= turbo_stream_from "post_index_stream" %>
+
 <div id="posts">
     <%= render @posts %>
 </div>

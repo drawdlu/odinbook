@@ -20,6 +20,9 @@ Rails.application.routes.draw do
         get :delete_button
       end
     end
+    member do
+      get :delete_button
+    end
   end
 
   resources :likes, only: [ :create, :destroy ]

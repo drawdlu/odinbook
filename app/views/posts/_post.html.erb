@@ -1,7 +1,10 @@
-<div class="post">
+<div id="<%= dom_id(post) %>" class="post">
     <div class="container">
         <div class="author">
             <%= post.user.username %>
+        </div>
+        <div class="delete-post">
+            <%= render "posts/link", post: post %>
         </div>
         <div class="content">
             <% if post.postable_type == "Picture" %>

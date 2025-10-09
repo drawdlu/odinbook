@@ -26,6 +26,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+
+    @post.destroy
+  end
+
+  def delete_button
+    @post = Post.find(params[:id])
+
+    render partial: "posts/link", locals: { post: @post }
+  end
+
   private
 
   def post_params

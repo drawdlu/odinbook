@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   belongs_to :postable, polymorphic: true
 
   after_create :broadcast_post
+  after_destroy :remove_post
 
   has_many :likes, dependent: :destroy
   has_many :user_likes, through: :likes, source: "user"
@@ -28,6 +29,10 @@ class Post < ApplicationRecord
     self.user.followers
   end
 
+  def owned_by?(user)
+    self.user == user
+  end
+
   def broadcast_post
     get_user_stream(self).each do |user|
       PostsChannel.broadcast_to(
@@ -38,5 +43,12 @@ class Post < ApplicationRecord
         ) }
       )
     end
+  end
+
+  def remove_post
+    broadcast_remove_to(
+      "post_index_stream",
+      target: "post_#{self.id}"
+    )
   end
 end

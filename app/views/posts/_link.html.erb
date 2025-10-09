@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "delete_button" do %>
+    <% if post.owned_by?(current_user) %>
+        <%= link_to "Delete", post_path(id: post.id),
+            data: { turbo_method: :delete } %>
+    <% end %>
+<% end %>
