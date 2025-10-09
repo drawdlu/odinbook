@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.turbo_stream
-        format.html { render root_path }
+        format.html { redirect_to root_path }
       else
         format.html { render :new, status: :unprocessable_content }
       end
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { render rooth_path }
+      format.html { redirect_to root_path }
     end
   end
 

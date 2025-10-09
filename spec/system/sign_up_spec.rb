@@ -10,6 +10,7 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when all data is valid" do
     it "successfully creates an account and logs in" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
       fill_in("Password", with: user.password)
@@ -23,6 +24,7 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when password is too short" do
     it "fails and prompts password too short" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
       fill_in("Password", with: "1234")
@@ -37,6 +39,7 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when password doesn't contain a symbol" do
     it "fails and prompts password requirements" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
       fill_in("Password", with: "1234")
@@ -58,6 +61,7 @@ RSpec.describe "Sign Up", type: :system do
     end
 
     it "fails and prompts duplicate username" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: email)
       fill_in("Password", with: user.password)
@@ -69,6 +73,7 @@ RSpec.describe "Sign Up", type: :system do
     end
 
     it "fails and prompts duplicate email" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: username)
       fill_in("Email", with: user.email)
       fill_in("Password", with: user.password)
@@ -82,6 +87,7 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when password does not match" do
     it "fails and prompts password not match" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
       fill_in("Password", with: user.password)
@@ -96,6 +102,7 @@ RSpec.describe "Sign Up", type: :system do
   context "when username length is invalid" do
     it "fails and displays error message" do
       invalid_username = "tes"
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: invalid_username)
       fill_in("Email", with: user.email)
       fill_in("Password", with: user.password)
@@ -109,6 +116,7 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when username is blank" do
     it "shows only blank error" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Email", with: user.email)
       fill_in("Password", with: user.password)
       fill_in("Password confirmation", with: user.password)
@@ -122,6 +130,7 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when username has a whitespace" do
     it "fails and displays error message" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 8)
       invalid_username = "test test"
       fill_in("Username", with: invalid_username)
       fill_in("Email", with: user.email)
@@ -140,7 +149,6 @@ RSpec.describe "Sign Up", type: :system do
     let!(:active_user) { create(:user, username: name) }
 
     before do
-      mock_oauth_provider(:google_oauth2)
       visit root_path
       click_button "Sign in with Google"
     end
@@ -151,6 +159,7 @@ RSpec.describe "Sign Up", type: :system do
     end
 
     it "signs up successfully with valid username" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       click_button "Sign up"
 
@@ -158,6 +167,7 @@ RSpec.describe "Sign Up", type: :system do
     end
 
     it "fails and renders notice when username is invalid" do
+      expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: name)
       click_button "Sign up"
 

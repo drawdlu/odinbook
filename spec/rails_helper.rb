@@ -82,4 +82,16 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
   end
+
+  config.before(:each, type: :system) do
+    OmniAuth.config.test_mode = true
+
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
+      provider: "google_oauth2",
+      uid: '123456789',
+      info: {
+        email: 'test@mail.com'
+      }
+    )
+  end
 end

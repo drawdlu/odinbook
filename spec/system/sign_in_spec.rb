@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Sign In", type: :system do
   let(:email) { "test@mail.com" }
   let!(:user) { create(:user, email: email) }
+
   context "when signing in using username and password" do
     before do
       visit root_path
@@ -27,10 +28,6 @@ RSpec.describe "Sign In", type: :system do
   end
   context "when signing up using google oauth" do
     let!(:user) { create(:user, email: "test@mail.com") }
-
-    before do
-      mock_oauth_provider(:google_oauth2)
-    end
 
     after do
       OmniAuth.config.test_mode = false

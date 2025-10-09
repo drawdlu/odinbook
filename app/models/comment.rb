@@ -14,7 +14,6 @@ class Comment < ApplicationRecord
   end
 
   def can_delete?(user)
-    puts "test test test"
     self.own_comment(user) || self.post.own_post(user)
   end
 

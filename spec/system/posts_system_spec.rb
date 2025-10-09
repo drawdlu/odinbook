@@ -14,7 +14,7 @@ RSpec.describe "Posts index page", type: :system do
     user_post
 
     visit root_path
-    expect(page).to have_content(user_post.body)
+    expect(page).to have_content(user_post.postable.content)
     expect(page).to have_content(user_post.user.username)
   end
 
@@ -23,7 +23,7 @@ RSpec.describe "Posts index page", type: :system do
     user.followed_users.create(following_id: another_user.id, status: 1)
 
     visit root_path
-    expect(page).to have_content(post.body)
+    expect(page).to have_content(post.postable.content)
     expect(page).to have_content(post.user.username)
   end
 
@@ -32,7 +32,7 @@ RSpec.describe "Posts index page", type: :system do
     user.followers<<(another_user)
 
     visit root_path
-    expect(page).to_not have_content(post.body)
+    expect(page).to_not have_content(post.postable.content)
     expect(page).to_not have_content(post.user.username)
   end
 

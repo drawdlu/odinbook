@@ -15,7 +15,7 @@ RSpec.describe Post, type: :model do
 
     context "when missing body text" do
       it "will be invalid when missing body text" do
-        new_post = build(:post, body: "")
+        new_post = build(:post, postable: nil)
         expect(new_post).to_not be_valid
       end
     end
@@ -29,14 +29,15 @@ RSpec.describe Post, type: :model do
 
     context "when using helper methods with user" do
       let(:user) { create(:user) }
+      let(:text) { create(:text) }
       it "will create a new post" do
-        post = user.posts.build(body: "test")
+        post = user.posts.build(postable: text)
         expect(post).to be_valid
       end
 
       it "can create multiple posts" do
-        post_1 = user.posts.build(body: "test")
-        post_2 = user.posts.build(body: "test")
+        post_1 = user.posts.build(postable: text)
+        post_2 = user.posts.build(postable: text)
         expect(post_1).to be_valid
         expect(post_2).to be_valid
       end
