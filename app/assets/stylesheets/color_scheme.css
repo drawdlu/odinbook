@@ -1,0 +1,18 @@
+body { 
+    background-color: black;
+    color: white;
+}
+
+* {
+    --gray: #6c757d;
+}
+
+a {
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: var(--gray);
+}
+
+

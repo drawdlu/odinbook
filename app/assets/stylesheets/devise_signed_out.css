@@ -1,0 +1,92 @@
+.container .logged-out {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr;
+    justify-content: center;
+    grid-column-gap: 10rem;
+    padding: 4rem;
+}
+
+/* Logo */
+
+.logged-out .side-logo {
+    justify-self: right;
+    align-self: center;
+    /* padding-right: 2rem; */
+    font-size: 3rem;
+}
+
+/* Form */
+
+#devise_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    width: 50ch;
+}
+
+#devise_form h2 {
+    margin-bottom: 1rem;
+}
+
+#devise_form .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#devise_form .field {
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+}#devise_form input[type=text],
+#devise_form input[type=password],
+#devise_form input[type=email] {
+    width: 32ch;
+}
+
+#devise_form .errors {
+    display: flex;
+    justify-content: center;
+}
+
+#devise_form #error_explanation {
+    max-width: 35ch;
+    padding: 1rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.devise-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.devise-oauth {
+    margin-top: 1.5rem;
+}
+
+#devise_form button { 
+    border-radius: 5px;
+    transition: color .3s ease-in-out;
+    transition: background-color .3s ease-in-out;
+}
+
+#devise_form button:hover {
+    background-color: var(--gray);
+}
+
+/* Footer */
+
+.logged-out .footer {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    margin-top: 10rem;
+}
