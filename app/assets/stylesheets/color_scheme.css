@@ -5,6 +5,7 @@ body {
 
 * {
     --gray: #6c757d;
+    --dark-gray: #222222;
 }
 
 a {

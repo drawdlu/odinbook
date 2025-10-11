@@ -1,0 +1,10 @@
+body {
+    /* display: flex; */
+    overflow: visible;
+}
+
+.container .main {
+    margin-top: 1rem;
+    margin-left: 600px;
+    height: 99vh;
+}

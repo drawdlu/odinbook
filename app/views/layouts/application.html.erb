@@ -23,15 +23,23 @@
   </head>
 
   <body>
-    <% if @show_nav %>
-      <%= render "layouts/nav_with_username" %>
-    <% elsif user_signed_in? %>
-      <%= render "layouts/nav_without_username" %>
-    <% end %>
-    <div class="notification">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div class="container">
+      <% if @show_nav %>
+        <%= render "layouts/nav_with_username" %>
+      <% elsif user_signed_in? %>
+        <%= render "layouts/nav_without_username" %>
+      <% end %>
     </div>
-    <%= yield %>
+    <div class="container">
+      <div class="main">
+        <div class="notification">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        </div>
+        <div class="content">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
