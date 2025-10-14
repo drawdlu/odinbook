@@ -1,10 +1,13 @@
-<h1>Follow Requests</h1>
+<%= turbo_frame_tag "main-content" do %>
+    <input type="hidden" id="page-id" value="follow-requests-link">
+    <h1>Follow Requests</h1>
 
-<%= turbo_stream_from "follow_request_stream_#{current_user.id}" %>
+    <%= turbo_stream_from "follow_request_stream_#{current_user.id}" %>
 
-<div id="follow_requests_<%= current_user.id %>">
-    <% @follow_requests.each do |follow| %>
-        <%= render "name_links", follow: follow %>
-    <% end %>
-</div>
+    <div id="follow_requests_<%= current_user.id %>">
+        <% @follow_requests.each do |follow| %>
+            <%= render "name_links", follow: follow %>
+        <% end %>
+    </div>
+<% end %>
 

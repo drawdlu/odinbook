@@ -35,3 +35,8 @@
     background-color: var(--dark-gray);
     color: white;
 }
+
+.navigation .link.active a {
+    font-weight: bold;
+}
+

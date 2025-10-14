@@ -1,10 +1,13 @@
-<h1>Index Posts</h1>
+<%= turbo_frame_tag "main-content" do %>
+    <input type="hidden" id="page-id" value="posts-link">
+    <h1>Posts</h1>
 
-<%= turbo_frame_tag "new_post", src: new_post_path %>
-<br>
+    <%= turbo_frame_tag "new_post", src: new_post_path %>
+    <br>
 
-<%= turbo_stream_from "post_index_stream" %>
+    <%= turbo_stream_from "post_index_stream" %>
 
-<div id="posts">
-    <%= render @posts %>
-</div>
+    <div id="posts">
+        <%= render @posts %>
+    </div>
+<% end %>
