@@ -1,5 +1,4 @@
-<%= turbo_frame_tag "main-content" do %>
-    <input type="hidden" id="page-id" value="profile-link">
+<%= turbo_frame_tag "main-content", data: { page_id: "profile-link" } do %>
     <h1>Profile</h1>
 
     <h2>Profile Picture</h2>

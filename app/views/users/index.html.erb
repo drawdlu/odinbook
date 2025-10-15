@@ -1,5 +1,4 @@
-<%= turbo_frame_tag "main-content" do %>
-    <input type="hidden" id="page-id" value="users-link">
+<%= turbo_frame_tag "main-content", data: { page_id: "users-link" } do %>
     <h1>Users</h1>
 
     <div class="users">

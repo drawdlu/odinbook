@@ -1,5 +1,4 @@
-<%= turbo_frame_tag "main-content" do %>
-    <input type="hidden" id="page-id" value="follow-requests-link">
+<%= turbo_frame_tag "main-content", data: { page_id: "follow-requests-link" } do %>
     <h1>Follow Requests</h1>
 
     <%= turbo_stream_from "follow_request_stream_#{current_user.id}" %>
