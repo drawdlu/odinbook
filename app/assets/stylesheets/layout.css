@@ -4,7 +4,21 @@ body {
 }
 
 .container .main {
-    margin-top: 1rem;
     margin-left: 600px;
     height: 99vh;
+}
+
+.container .page {
+    border-left: 1px solid var(--dark-gray);
+    border-right: 1px solid var(--dark-gray);
+    width: 65ch;
+    height: 100vh;
+}
+
+.container .page .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--dark-gray);
 }

@@ -1,15 +1,18 @@
 <%= turbo_frame_tag "main-content", data: { page_id: "profile-link" } do %>
-    <h1>Profile</h1>
-
-    <h2>Profile Picture</h2>
-    <img src="<%= @profile.image %>=s128" alt="User avatar" />
-
-    <h2>Information</h2>
-    <div class="info"><%= @user.username %></div>
-    <div class="info"><%= @user.email %></div>
-    <div class="info"><%= @profile.about %></div>
-    <div class="info"><%= @profile.first_name %> <%= @profile.last_name %></div>
-
-    <h2>User Posts</h2>
-    <%= render @posts %>
+    <div class="container">
+        <div class="page">
+            <div class="title">
+                <h3>Profile</h3>
+            </div>
+            <h2>Profile Picture</h2>
+            <img src="<%= @profile.image %>=s128" alt="User avatar" />
+            <h2>Information</h2>
+            <div class="info"><%= @user.username %></div>
+            <div class="info"><%= @user.email %></div>
+            <div class="info"><%= @profile.about %></div>
+            <div class="info"><%= @profile.first_name %> <%= @profile.last_name %></div>
+            <h2>User Posts</h2>
+            <%= render @posts %>
+        </div>
+    </div>
 <% end %>

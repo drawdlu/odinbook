@@ -1,7 +1,9 @@
 <%= turbo_frame_tag "main-content", data: { page_id: "posts-link" } do  %>
     <div class="container">
-        <div class="posts-page">
-            <h1>Posts</h1>
+        <div class="page">
+            <div class="title">
+                <h3>For you</h3>
+            </div>
             <%= turbo_frame_tag "new_post", src: new_post_path %>
             <br>
             <%= turbo_stream_from "post_index_stream" %>
