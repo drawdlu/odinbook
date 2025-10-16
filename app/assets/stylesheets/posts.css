@@ -88,4 +88,11 @@ label[for=post_image] svg:hover {
 .post-form form img {
     grid-column: 1 / span 2;
     margin: 1rem;
+    border-radius: 15px;
+}
+
+/* Posts */
+
+.post .container .content img {
+    border-radius: 15px;
 }
