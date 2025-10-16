@@ -6,12 +6,15 @@ class Post < ApplicationRecord
 
   after_create :broadcast_post
   after_destroy :remove_post
+  after_validation :remove_postable_errors
 
   has_many :likes, dependent: :destroy
   has_many :user_likes, through: :likes, source: "user"
 
   has_many :comments, dependent: :destroy
   has_many :commenting_users, through: :comments, source: "user"
+
+  validates :postable_id, presence: true
 
   def get_like_id(user)
     user.likes.where(post_id: self.id).first.id
@@ -50,5 +53,9 @@ class Post < ApplicationRecord
       "post_index_stream",
       target: "post_#{self.id}"
     )
+  end
+
+  def remove_postable_errors
+    errors.delete(:postable_id)
   end
 end

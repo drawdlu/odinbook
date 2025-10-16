@@ -11,9 +11,9 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build
     if post_params[:image]
-      @post.postable = Picture.new(content: post_params[:image], alt: post_params[:content])
+      @post.postable = Picture.create(content: post_params[:image], alt: post_params[:content])
     else
-      @post.postable = Text.new(post_params)
+      @post.postable = Text.create(post_params)
     end
 
     respond_to do |format|

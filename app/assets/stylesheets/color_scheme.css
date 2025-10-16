@@ -4,6 +4,8 @@ body {
 }
 
 * {
+    --lighter-gray: #d4d4d4;
+    --light-gray: #bebebe;
     --gray: #6c757d;
     --dark-gray: #222222;
 }

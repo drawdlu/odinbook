@@ -1,13 +1,22 @@
 <%= turbo_frame_tag "new_post" do %>
     <div class="container">
-        <div class="post-form">
+        <div class="post-form" data-controller="post-form" >
+            <div class="profile-image">
+                <%= image_tag url_for(current_user.profile.image) %>
+            </div>
             <%= form_with model: post do |f| %>
-                <% post.errors.full_messages.each do |message| %>
-                    <%= message %>
-                <% end %>
-                <%= f.text_field :content %>
-                <%= f.file_field :image, direct_upload: true%>
-                <%= f.submit "Post" %>
+                <%= f.text_area :content, placeholder: "What's happening?",
+                    data: { action: "input->post-form#toggleButtonText",
+                        post_form_target: "input" } %>
+                <div class="upload-file">
+                    <%= f.label :image do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>image-outline</title><path d="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M13.96,12.29L11.21,15.83L9.25,13.47L6.5,17H17.5L13.96,12.29Z" /></svg>
+                    <% end %>
+                    <%= f.file_field :image, direct_upload: true, 
+                        data: { action: "change->post-form#toggleButtonFile",
+                            post_form_target: "uploadButton" } %>
+                </div>
+                <%= f.submit "Post", data: { post_form_target: "submit" }, class: "inactive-button" %>
             <% end %>
         </div>
     </div>

@@ -11,8 +11,8 @@ body {
 .container .page {
     border-left: 1px solid var(--dark-gray);
     border-right: 1px solid var(--dark-gray);
-    width: 65ch;
-    height: 100vh;
+    width: 70ch;
+    height: 100%;
 }
 
 .container .page .title {
