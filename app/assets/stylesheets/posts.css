@@ -55,12 +55,17 @@
     color: black;
 }
 
+.inactive-button:hover {
+    pointer-events: none;
+}
+
 .active-button {
     background-color: var(--lighter-gray);
 }
 
 .active-button:hover {
     background-color: var(--light-gray);
+    pointer-events: auto;
 }
     
 input#post_image {
