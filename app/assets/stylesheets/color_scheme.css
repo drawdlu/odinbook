@@ -8,6 +8,9 @@ body {
     --light-gray: #bebebe;
     --gray: #6c757d;
     --dark-gray: #222222;
+    --blue: #1DA1F2;
+    --dark-blue: #0a1015;
+    --notification-banner: #15202b;
 }
 
 a {

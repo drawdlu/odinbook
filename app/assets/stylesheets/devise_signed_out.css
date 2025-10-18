@@ -7,6 +7,12 @@
     padding: 4rem;
 }
 
+#notifications.devise {
+    text-align: center;
+    margin-top: .5rem;
+    height: 3ch;
+}
+
 /* Logo */
 
 .logged-out .side-logo {
