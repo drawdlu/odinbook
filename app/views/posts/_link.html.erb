@@ -1,6 +1,8 @@
 <%= turbo_frame_tag "delete_button" do %>
     <% if post.owned_by?(current_user) %>
-        <%= link_to "Delete", post_path(id: post.id),
-            data: { turbo_method: :delete } %>
+        <%= link_to post_path(id: post.id),
+            data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this post?" } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>delete-outline</title><path d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" /></svg>
+        <% end %>
     <% end %>
 <% end %>

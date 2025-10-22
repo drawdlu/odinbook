@@ -11,7 +11,7 @@ body {
 .container .page {
     border-left: 1px solid var(--dark-gray);
     border-right: 1px solid var(--dark-gray);
-    width: 70ch;
+    width: 60ch;
     height: 100%;
 }
 

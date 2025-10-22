@@ -1,6 +1,8 @@
-<%= turbo_frame_tag "comment_delete_#{comment.id}" do %>
+<%= turbo_frame_tag "comment_delete_#{comment.id}", class: "delete-comment" do %>
     <% if comment.can_delete?(Current.user) %>
-        <%= link_to "Delete", post_comment_path(post_id: post.id, id: comment.id),
-            data: { turbo_method: :delete, turbo_stream: true }%>
+        <%= link_to post_comment_path(post_id: post.id, id: comment.id),
+            data: { turbo_method: :delete, turbo_stream: true } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>alpha-x</title><path d="M9,7L11,12L9,17H11L12,14.5L13,17H15L13,12L15,7H13L12,9.5L11,7H9Z" /></svg>
+        <% end %>
     <% end %>
 <% end %>

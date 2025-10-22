@@ -1,6 +1,7 @@
 <div id="<%= dom_id(post) %>" class="post">
     <div class="container">
         <div class="author">
+            <%= image_tag url_for(post.user.profile.image), size: "40" %>
             <%= post.user.username %>
         </div>
         <div class="delete-post">
@@ -16,9 +17,6 @@
         <div class="likes">
             <%= render "likes/like", post: post %>
         </div>
-        <div class="line">
-            ------------------------------------
-        </div>
         <%= turbo_stream_from "comments_stream_#{post.id}" %>
         <div class="comments">
             <%= turbo_frame_tag "comments_#{post.id}" do %>
@@ -28,7 +26,5 @@
             <% end %>
             <%= turbo_frame_tag "new_comment_#{post.id}", src: new_post_comment_path(post_id: post.id) %>
         </div>
-        <br>
-        <br>
     </div>
 </div>
