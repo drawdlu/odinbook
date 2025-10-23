@@ -46,10 +46,6 @@
     margin-right: 1rem;
 }
 
-.container .post-form input[type=submit]:hover {
-    cursor: pointer;
-}
-
 .inactive-button { 
     background-color: var(--dark-gray);
     color: black;
@@ -66,6 +62,7 @@
 .active-button:hover {
     background-color: var(--light-gray);
     pointer-events: auto;
+    cursor: pointer;
 }
     
 input#post_image {
@@ -171,21 +168,17 @@ label[for=post_image] svg:hover {
     background-color: black;
     color: white;
     width: 45ch;
-    border: solid 1px var(--dark-gray);
+    border: none;
+    outline: none;
 }
 
 .post .container .comments form input[type="submit"] {
     margin-left: .5rem;
     border-radius: 20px;
-    padding: .5ch 1ch;
+    padding: .5ch 1.3ch;
     border: none;
-    background-color: var(--lighter-gray);
+    font-weight: bold;
     transition: .3s;
-}
-
-.post .container .comments form input[type="submit"]:hover {
-    background-color: var(--light-gray);
-    cursor: pointer;
 }
 
 .post .container .comments .comment {

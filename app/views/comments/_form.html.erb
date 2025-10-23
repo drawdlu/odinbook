@@ -1,10 +1,14 @@
 <%= turbo_frame_tag "new_comment_#{post.id}" do %>
-    <%= form_with model: comment, url: post_comments_path do |f| %>
-        <% comment.errors.full_messages.each do |message| %>
-            <%= message %>
+    <div class="comment-form" data-controller="form" >
+        <%= form_with model: comment, url: post_comments_path do |f| %>
+            <% comment.errors.full_messages.each do |message| %>
+                <%= message %>
+            <% end %>
+            <%= f.text_field :body, placeholder: "Post your reply",
+                    data: { action: "input->form#toggleButtonText",
+                            form_target: "input" } %>
+            <%= f.submit "Reply", data: { form_target: "submit" }, class: "inactive-button"  %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
         <% end %>
-        <%= f.text_field :body %>
-        <%= f.submit "Comment" %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-    <% end %>
+    </div>
 <% end %>
