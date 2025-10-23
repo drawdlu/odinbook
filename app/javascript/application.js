@@ -2,3 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "channels"
+
+document.addEventListener("turbo:before-fetch-request", () => {
+  // Always clear active focus just before Turbo sends request
+  document.activeElement?.blur()
+})
