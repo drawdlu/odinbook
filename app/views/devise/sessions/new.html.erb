@@ -2,7 +2,7 @@
   <h2>Log in</h2>
 
   <div class="form">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
       <div class="field">
         <%= f.label :username %>
         <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
