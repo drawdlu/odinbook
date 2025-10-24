@@ -9,9 +9,9 @@ class Like < ApplicationRecord
 
   def broadcast_like
     broadcast_update_to(
-      "like",
+      "like_#{self.post.id}",
       partial: "likes/like_count",
-      target: "like_count_#{post.id}",
+      target: "like_count_#{self.post.id}",
       locals: { post: self.post }
     )
   end
