@@ -1,14 +1,22 @@
-<h1>Following</h1>
+<%= turbo_frame_tag "main-content" do %>
+    <div class="container">
+        <div class="page profile">
+            <div class="title">
+                <%= render "profiles/navigation" %>
+            </div>
+            <%= turbo_frame_tag "profile-pages", data: { page_id: "followings-link" } do %>
+                <%= turbo_stream_from "following_#{current_user.id}" %>
 
-<%= turbo_stream_from "following_#{current_user.id}" %>
 
-
-<div id="following-list">
-    <% @followings.each do |follow| %>
-        <div id="follow_<%= follow.id %>" >
-            <%= follow.following.username %>
-            <%= render "follows/follow_link", user: follow.following %>
+                <div id="following-list">
+                    <% @followings.each do |follow| %>
+                        <div id="follow_<%= follow.id %>" >
+                            <%= follow.following.username %>
+                            <%= render "follows/follow_link", user: follow.following %>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
         </div>
-    <% end %>
-</div>
-
+    </div>
+<% end %>
