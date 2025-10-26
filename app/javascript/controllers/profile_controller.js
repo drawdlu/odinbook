@@ -14,7 +14,7 @@ export default class extends Controller {
     }
     highlight(event) {
         remove_hightlight(this.activeLink, this.activeLink.lastElementChild)
-        this.activeLink = event.currentTarget
+        this.activeLink = event.currentTarget.parentElement
         highlight_link(this.activeLink, this.activeLink.lastElementChild)
     }
 }
