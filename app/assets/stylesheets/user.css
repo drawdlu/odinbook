@@ -1,0 +1,41 @@
+/* Edit */
+.profile-form .form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.profile-form .image-field {
+    display: flex; 
+    justify-content: space-between;
+    margin-bottom: .5rem;
+}
+
+.profile-form .field{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-form .field input {
+    width: 30ch;
+}
+
+.profile-form .field label, 
+.profile-form .image-field label {
+    font-weight: bold;
+}
+
+.profile-form .submit input[type="submit"] {
+    border-radius: 20px;
+    padding: .25rem .5rem;
+    border: none;
+    font-weight: bold;
+    background-color: var(--lighter-gray);
+}
+
+.profile-form .submit input[type="submit"]:hover {
+    background-color: var(--light-gray);
+    cursor: pointer;
+}
+

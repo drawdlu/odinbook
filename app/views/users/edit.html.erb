@@ -8,25 +8,29 @@
                             <%= message %>
                         <% end%>
                     </div>
-                    <div class="field">
-                        <%= render "profiles/profile_image",  profile: @user.profile %>
+                    <%= render "profiles/profile_image",  profile: @user.profile %>
+                    <div class="image-field">
                         <%= profile_form.label :image, "Profile Picture" %>
                         <%= profile_form.file_field :image, direct_upload: true %>
                     </div>
-                    <div class="field">
-                        <%= f.label :username %>
-                        <%= f.text_field :username, placeholder: @user.username %>
-                    </div>
-                    <div class="field">
-                        <%= profile_form.label :about %>
-                        <%= profile_form.text_field :about %>
-                    </div>
-                    <div class="field">
-                        <%= f.label :email %>
-                        <%= f.email_field :email %>
+                    <div class="form">
+                        <div class="field">
+                            <%= f.label :username %>
+                            <%= f.text_field :username, placeholder: @user.username %>
+                        </div>
+                        <div class="field">
+                            <%= profile_form.label :about %>
+                            <%= profile_form.text_field :about %>
+                        </div>
+                        <div class="field">
+                            <%= f.label :email %>
+                            <%= f.email_field :email %>
+                        </div>
+                        <div class="submit">
+                            <%= f.submit "Update" %>
+                        </div>
                     </div>
                 <% end %>
-                <%= f.submit "Update" %>
             <% end %>
         </div>
     </div>
