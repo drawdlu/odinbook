@@ -95,3 +95,29 @@
 #profile-info .user-information .about {
     margin-top: .4rem;
 }
+
+.profile-button .edit-link a {
+    padding: .5rem 1rem;
+    border-radius: 30px;
+    border: .5px solid var(--gray);
+    transition: .3s;
+    font-weight: bold;
+}
+
+.profile-button .edit-link a:hover {
+    background-color: var(--dark-gray);
+    color: white;
+}
+
+#profile-info .user-information .joined {
+    margin-top: .5rem;
+    color: var(--gray);
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+}
+
+#profile-info .user-information .joined svg {
+    fill: var(--gray);
+    height: 17px;
+}

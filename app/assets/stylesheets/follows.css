@@ -1,0 +1,14 @@
+/* Follow Link */
+
+.follow-link a {
+    padding: .5rem 1rem;
+    border-radius: 20px;
+    background-color: var(--lighter-gray);
+    font-weight: bold;
+    color: black;
+    transition: .3s;
+}
+
+.follow-link a:hover {
+    background-color: var(--light-gray);
+}

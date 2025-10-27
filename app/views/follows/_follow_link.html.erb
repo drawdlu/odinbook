@@ -5,16 +5,18 @@
         <% follow = "Follow" %>
     <% end %>
 
-    <% if user.follower?(current_user) %>
-        <%= link_to "Unfollow",
-        follow_path(id: user.follower_id(current_user)),
-        data: { turbo_method: :delete }%>
-    <% elsif user.pending_follower?(current_user) %>
-        <%= link_to "Cancel Request",
-        follow_path(id: user.follower_id(current_user)),
-        data: { turbo_method: :delete }%>
-    <% else %>
-        <%= link_to follow, follows_path(following_id: user.id),
-        data: { turbo_method: :post }%>
-    <% end %>
+    <div class="follow-link">
+        <% if user.follower?(current_user) %>
+            <%= link_to "Unfollow",
+            follow_path(id: user.follower_id(current_user)),
+            data: { turbo_method: :delete }%>
+        <% elsif user.pending_follower?(current_user) %>
+            <%= link_to "Cancel Request",
+            follow_path(id: user.follower_id(current_user)),
+            data: { turbo_method: :delete }%>
+        <% else %>
+            <%= link_to follow, follows_path(following_id: user.id),
+            data: { turbo_method: :post }%>
+        <% end %>
+    </div>
 <% end %>
