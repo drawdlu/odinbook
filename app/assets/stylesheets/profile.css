@@ -63,3 +63,32 @@
 .navigation-links#followings-link .border-blue {
     width: 10ch;
 }
+
+/* User info */
+#profile-info .container{
+    padding: 2rem;
+    border-bottom: 1px solid var(--dark-gray);
+}
+
+#profile-info .user-information .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#profile-info .user-information .username {
+    color: var(--gray);
+}
+
+#profile-info .user-information .profile-button {
+    justify-self: top;
+}
+
+#profile-info img{
+    border-radius: 50px;
+    margin-bottom: .6rem;
+}
+
+#profile-info .user-information .about {
+    margin-top: .4rem;
+}

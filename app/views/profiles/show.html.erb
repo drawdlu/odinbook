@@ -5,14 +5,21 @@
                 <%= render "navigation" %>
             </div>
             <%= turbo_frame_tag "profile-pages", data: { page_id: "profile-link" } do %>
-                <h2>Profile Picture</h2>
-                <img src="<%= @profile.image %>=s128" alt="User avatar" />
-                <h2>Information</h2>
-                <div class="info"><%= @user.username %></div>
-                <div class="info"><%= @user.email %></div>
-                <div class="info"><%= @profile.about %></div>
-                <div class="info"><%= @profile.first_name %> <%= @profile.last_name %></div>
-                <h2>User Posts</h2>
+                <%= turbo_frame_tag "profile-info" do %>
+                    <div class="container">
+                        <div class="user-information">
+                            <div class="top">
+                                <img src="<%= @profile.image %>=s128" alt="User avatar" />
+                                <div class="profile-button">Edit</div>
+                            </div>
+                            <div class="bottom">
+                                <div class="username">@<%= @user.username %></div>
+                                <div class="email"><%= @user.email %></div>
+                                <div class="about"><%= @profile.about %></div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
                 <%= turbo_frame_tag "new_post", src: new_post_path %>
                 <%= turbo_stream_from "post_index_stream" %>
                 <div id="posts">
