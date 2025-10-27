@@ -1,0 +1,9 @@
+<% if profile.user == current_user %>
+    <div class="edit-link">
+        <%= link_to "Edit profile", edit_user_path(id: current_user.id) %>
+    </div>
+<% else %>
+    <%= turbo_frame_tag "user_link_#{profile.user.id}" do %>
+        <% render "follows/follow_link", user: profile.user %>
+    <% end %>
+<% end %>

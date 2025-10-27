@@ -1,0 +1,5 @@
+<% if profile.image.attached? %>
+    <%= image_tag url_for(profile.image), alt: "User avatar" %>
+<% else %>
+    <%= image_tag url_for(profile.image_url), alt: "User avatar" %>
+<% end %>

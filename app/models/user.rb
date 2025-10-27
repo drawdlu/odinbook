@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
 
   # Users that this user is following
   has_many :followed_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
@@ -85,9 +86,9 @@ class User < ApplicationRecord
 
   def set_profile_image
     if self.profile.nil?
-      self.create_profile(image: gravatar_url(self.email))
+      self.create_profile(image_url: gravatar_url(self.email))
     elsif self.profile.image.nil?
-      self.profile.update(image: gravatar_url(self.email))
+      self.profile.update(image_url: gravatar_url(self.email))
     end
   end
 

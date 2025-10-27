@@ -2,25 +2,13 @@
     <div class="container">
         <div class="page profile">
             <div class="title">
-                <%= render "navigation" %>
+                <%= render "profiles/navigation" %>
             </div>
             <%= turbo_frame_tag "profile-pages", data: { page_id: "profile-link" } do %>
-                <%= turbo_frame_tag "profile-info" do %>
-                    <div class="container">
-                        <div class="user-information">
-                            <div class="top">
-                                <img src="<%= @profile.image %>=s128" alt="User avatar" />
-                                <div class="profile-button">Edit</div>
-                            </div>
-                            <div class="bottom">
-                                <div class="username">@<%= @user.username %></div>
-                                <div class="email"><%= @user.email %></div>
-                                <div class="about"><%= @profile.about %></div>
-                            </div>
-                        </div>
-                    </div>
+                <%= render "information", profile: @profile, user: @user %>
+                <% if @profile == current_user.profile %>
+                    <%= turbo_frame_tag "new_post", src: new_post_path %>
                 <% end %>
-                <%= turbo_frame_tag "new_post", src: new_post_path %>
                 <%= turbo_stream_from "post_index_stream" %>
                 <div id="posts">
                     <%= render @posts %>

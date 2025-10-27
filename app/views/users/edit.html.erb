@@ -1,0 +1,33 @@
+<%= turbo_frame_tag "profile-info" do %>
+    <div class="container">
+        <div class="profile-form">
+            <%= form_with model: @user, url: user_path do |f| %>
+                <%= f.fields_for :profile do |profile_form| %>
+                    <div class="errors">
+                        <% @user.errors.full_messages.each do |message| %>
+                            <%= message %>
+                        <% end%>
+                    </div>
+                    <div class="field">
+                        <%= render "profiles/profile_image",  profile: @user.profile %>
+                        <%= profile_form.label :image, "Profile Picture" %>
+                        <%= profile_form.file_field :image, direct_upload: true %>
+                    </div>
+                    <div class="field">
+                        <%= f.label :username %>
+                        <%= f.text_field :username, placeholder: @user.username %>
+                    </div>
+                    <div class="field">
+                        <%= profile_form.label :about %>
+                        <%= profile_form.text_field :about %>
+                    </div>
+                    <div class="field">
+                        <%= f.label :email %>
+                        <%= f.email_field :email %>
+                    </div>
+                <% end %>
+                <%= f.submit "Update" %>
+            <% end %>
+        </div>
+    </div>
+<% end %>

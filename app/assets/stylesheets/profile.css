@@ -84,8 +84,11 @@
     justify-self: top;
 }
 
-#profile-info img{
+.user-information .top img, 
+.profile-form img {
     border-radius: 50px;
+    width: 70px;
+    height: 70px;
     margin-bottom: .6rem;
 }
 

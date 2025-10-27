@@ -14,7 +14,7 @@ class OmniauthUserService
         uid: @auth.uid
       )
 
-      user.build_profile(image: @auth.info.image)
+      user.build_profile(image_url: @auth.info.image)
 
       user.save(validate: false)
     end

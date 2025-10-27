@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "profile-info" do %>
+    <div class="container">
+        <div class="user-information">
+            <div class="top">
+                <%= render "profiles/profile_image", profile: profile %>
+                <div class="profile-button">
+                    <%= render "profiles/link", profile: profile %>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="username">@<%= user.username %></div>
+                <div class="about"><%= profile.about %></div>
+                <div class="email"><%= user.email %></div>
+            </div>
+        </div>
+    </div>
+<% end %>

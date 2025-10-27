@@ -1,9 +1,7 @@
 FactoryBot.define do
   factory :profile do
-    image { "MyText" }
+    image_url { "MyText" }
     about { "MyText" }
-    first_name { "MyText" }
-    last_name { "MyText" }
     user
   end
 end
