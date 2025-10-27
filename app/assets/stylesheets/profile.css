@@ -32,10 +32,14 @@
 
 .profile-navigation .navigation-links:hover {
     background-color: var(--dark-gray);
-    color: inherit;
+    color: var(--gray);
 }
 
-.profile-navigation .navigation-links.active a:hover {
+.profile-navigation .navigation-links.active a:hover{
+    color: white;
+}
+
+.profile-navigation .navigation-links.active:hover {
     color: white;
 } 
 
