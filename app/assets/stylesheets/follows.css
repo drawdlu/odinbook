@@ -49,3 +49,7 @@
 .follow-requests {
     min-height: 95vh;
 }
+
+.follow-notify-symbol {
+    color: var(--blue);
+}

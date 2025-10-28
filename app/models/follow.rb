@@ -5,6 +5,7 @@ class Follow < ApplicationRecord
   after_create :add_follow_request
   after_destroy :remove_follow
   after_update :add_follower_following
+  after_commit :update_link, on: [ :create, :update, :destroy ]
 
   enum :status, { pending: 0, accepted: 1 }
 
@@ -18,6 +19,15 @@ class Follow < ApplicationRecord
       target: "follow_requests_#{self.following_id}",
       partial: "follows/follow_requests/name_links",
       locals: { follow: self }
+    )
+  end
+
+  def update_link
+    broadcast_update_to(
+      "follow_link_#{self.following_id}",
+      target: "follow-request-text",
+      partial: "follows/follow_requests_text",
+      locals: { user: self.following }
     )
   end
 
