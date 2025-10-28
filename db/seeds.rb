@@ -8,6 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require 'factory_bot_rails'
+require 'faker'
 
 include FactoryBot::Syntax::Methods
 
@@ -16,6 +17,12 @@ include FactoryBot::Syntax::Methods
 users = []
 10.times do
   users.push(create(:user))
+end
+
+# Profile
+users.each do |user|
+  sentence = Faker::Lorem.sentence(word_count: rand(3..6))
+  user.profile.update(about: sentence)
 end
 
 # Follows
@@ -29,12 +36,15 @@ end
 # Posts
 posts = []
 10.times do
-  posts.push(create(:post, user: users.sample))
+  content = Faker::Lorem.sentence(word_count: rand(2..5))
+  text = Text.create(content: content)
+  posts.push(create(:post, user: users.sample, postable: text))
 end
 
 # Comments
 10.times do
-  create(:comment, user: users.sample, post: posts.sample)
+  sentence = Faker::Lorem.sentence(word_count: rand(1..3))
+  create(:comment, user: users.sample, post: posts.sample, body: sentence)
 end
 
 # Likes
