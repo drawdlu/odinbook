@@ -24,31 +24,31 @@ RSpec.describe "Sign Up", type: :system do
 
   context "when password is too short" do
     it "fails and prompts password too short" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
-      fill_in("Password", with: "1234")
-      fill_in("Password confirmation", with: "1234")
+      fill_in("Password", with: "123hfF%")
+      fill_in("Password confirmation", with: "123hfF%")
       click_button "Sign up"
       sleep 1
 
       expect(page).to have_content("Password is too short (minimum is 8 characters)")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 
   context "when password doesn't contain a symbol" do
     it "fails and prompts password requirements" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
-      fill_in("Password", with: "1234")
+      fill_in("Password", with: "1234aS34")
       fill_in("Password confirmation", with: "1234aS34")
       click_button "Sign up"
       sleep 1
 
       expect(page).to have_content("Password must include a symbol")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 
@@ -61,6 +61,7 @@ RSpec.describe "Sign Up", type: :system do
     end
 
     it "fails and prompts duplicate username" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: email)
@@ -69,10 +70,10 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
 
       expect(page).to have_content("Username has already been taken")
-      expect(page).to have_current_path(new_user_registration_path)
     end
 
     it "fails and prompts duplicate email" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: username)
       fill_in("Email", with: user.email)
@@ -81,12 +82,12 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
 
       expect(page).to have_content("Email has already been taken")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 
   context "when password does not match" do
     it "fails and prompts password not match" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: user.username)
       fill_in("Email", with: user.email)
@@ -95,13 +96,13 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
 
       expect(page).to have_content("Password confirmation doesn't match Password")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 
   context "when username length is invalid" do
     it "fails and displays error message" do
       invalid_username = "tes"
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Username", with: invalid_username)
       fill_in("Email", with: user.email)
@@ -110,12 +111,12 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
 
       expect(page).to have_content("Username is too short (minimum is 4 characters)")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 
   context "when username is blank" do
     it "shows only blank error" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 5)
       fill_in("Email", with: user.email)
       fill_in("Password", with: user.password)
@@ -124,12 +125,12 @@ RSpec.describe "Sign Up", type: :system do
 
       expect(page).to have_content("Username can't be blank")
       expect(page).to_not have_content("Username is too short (minimum is 4 characters)")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 
   context "when username has a whitespace" do
     it "fails and displays error message" do
+      expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector("input[name='user[username]']", wait: 8)
       invalid_username = "test test"
       fill_in("Username", with: invalid_username)
@@ -139,7 +140,6 @@ RSpec.describe "Sign Up", type: :system do
       click_button "Sign up"
 
       expect(page).to have_content("Username should not contain any whitespace")
-      expect(page).to have_current_path(new_user_registration_path)
     end
   end
 

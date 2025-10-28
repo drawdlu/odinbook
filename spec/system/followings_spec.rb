@@ -7,6 +7,7 @@ RSpec.describe "Followings", type: :system do
   before do
     driven_by(:rack_test)
     login_as(user)
+    click_link "Profile"
     click_link "Following"
   end
 

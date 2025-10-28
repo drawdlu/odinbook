@@ -8,6 +8,7 @@ RSpec.describe "Followers", type: :system do
   before do
     driven_by(:selenium_chrome_headless)
     login_as(user)
+    click_link "Profile"
     click_link "Followers"
   end
 
