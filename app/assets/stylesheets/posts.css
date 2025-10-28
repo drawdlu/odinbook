@@ -120,6 +120,17 @@ label[for=post_image] svg:hover {
     font-size: 1.1rem;
 }
 
+.post .container .author a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.post .container .author a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
 .post .container .delete-post {
     display: inline-block;
     width: auto;

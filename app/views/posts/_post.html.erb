@@ -1,8 +1,11 @@
 <div id="<%= dom_id(post) %>" class="post">
     <div class="container">
         <div class="author">
-            <%= render "profiles/profile_image",  profile: post.user.profile %>
-            <%= post.user.username %>
+            <%= link_to user_profile_path(user_id: post.user.id), 
+                data: { turbo_action: "advance" } do %>
+                <%= render "profiles/profile_image",  profile: post.user.profile %>
+                <%= post.user.username %>
+            <% end %>
         </div>
         <div class="delete-post">
             <%= render "posts/link", post: post %>
