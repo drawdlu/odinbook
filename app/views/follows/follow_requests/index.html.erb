@@ -5,7 +5,7 @@
                 <h3>Follow Requests</h3>
             </div>
             <%= turbo_stream_from "follow_request_stream_#{current_user.id}" %>
-            <div id="follow_requests_<%= current_user.id %>">
+            <div id="follow_requests_<%= current_user.id %>" class="follow-requests">
                 <% @follow_requests.each do |follow| %>
                     <%= render "name_links", follow: follow %>
                 <% end %>

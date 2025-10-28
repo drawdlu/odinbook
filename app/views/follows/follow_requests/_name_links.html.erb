@@ -1,9 +1,13 @@
-<div id="follow_<%= follow.id %>" >
-        <%= follow.follower.username %>
-        <%= turbo_frame_tag "follow_link_#{follow.id}" do %>
-        <%= link_to "Accept", follow_request_path(id: follow.id),
-                data: { turbo_method: :patch }%> /
-        <%= link_to "Deny", follow_request_path(id: follow.id), 
-                data: { turbo_method: :delete } %>
+<div id="follow_<%= follow.id %>" class="user-card">
+        <%= link_to user_profile_path(user_id: follow.follower.id), 
+                data: { turbo_action: "advance" } do %>
+                <%= render "profiles/profile_image", profile: follow.follower.profile %>
+                <%= follow.follower.username %>
+        <% end %>
+        <%= turbo_frame_tag "follow_link_#{follow.id}", class: "follow-request-link" do %>
+                <%= link_to "Accept", follow_request_path(id: follow.id),
+                        data: { turbo_method: :patch }%> /
+                <%= link_to "Deny", follow_request_path(id: follow.id), 
+                        data: { turbo_method: :delete } %>
         <% end %>
 </div>

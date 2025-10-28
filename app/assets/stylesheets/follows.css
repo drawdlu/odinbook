@@ -4,18 +4,18 @@
     min-height: 95vh; 
 }
 
-.user-list .user-card img {
+.user-card img {
     border-radius: 40px;
 }
 
-.user-list .user-card {
+.user-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
 }
 
-.user-list .user-card a {
+.user-card a {
     display: flex;
     align-items: center;
     gap: .5rem;
@@ -34,4 +34,18 @@
 
 .follow-link a:hover {
     background-color: var(--light-gray);
+}
+
+/* Follow request */
+
+.follow-request-link {
+    display: flex;
+    justify-content: center;
+    gap: 1ch;
+    min-width: 20ch;
+    font-weight: bold;
+}
+
+.follow-requests {
+    min-height: 95vh;
 }
