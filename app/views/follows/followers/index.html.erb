@@ -8,10 +8,14 @@
                 <%= turbo_stream_from "followers_#{current_user.id}" %>
 
 
-                <div id="follower-list">
+                <div id="follower-list" class="user-list" >
                     <% @followers.each do |follow| %>
-                        <div id="follow_<%= follow.id %>" >
-                            <%= follow.follower.username %>
+                        <div id="follow_<%= follow.id %>" class="user-card" >
+                            <%= link_to user_profile_path(user_id: follow.follower.id), 
+                                    data: { turbo_action: "advance" } do %>
+                                <%= render "profiles/profile_image", profile: follow.follower.profile %>
+                                <%= follow.follower.username %>
+                            <% end %>
                             <%= render "follows/follow_link", user: follow.follower %>
                         </div>
                     <% end %>

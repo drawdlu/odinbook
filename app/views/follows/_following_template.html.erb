@@ -1,2 +1,8 @@
-<%= follow.following.username %>
-<%= render "follows/link", user_id: follow.following.id, follow_id: follow.id %>
+<div id="follow_<%= follow.id %>" class="user-card" >
+    <%= link_to user_profile_path(user_id: follow.following.id), 
+            data: { turbo_action: "advance" } do %>
+        <%= render "profiles/profile_image", profile: follow.following.profile %>
+        <%= follow.following.username %>
+    <% end %>
+    <%= render "follows/link", user_id: follow.following.id, follow_id: follow.id %>
+</div>

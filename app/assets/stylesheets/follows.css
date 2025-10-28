@@ -1,3 +1,26 @@
+/* Follow Instance */
+
+.user-list {
+    min-height: 95vh; 
+}
+
+.user-list .user-card img {
+    border-radius: 40px;
+}
+
+.user-list .user-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.user-list .user-card a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
 /* Follow Link */
 
 .follow-link a {

@@ -2,13 +2,13 @@
     <div class="container">
         <div class="page">
             <div class="title">
-                <h3>Users</h3>
+                <h3>User</h3>
             </div>
             <div class="users">
-                <div class="container">
+                <div class="container user-list">
                     <%= turbo_stream_from "user_index_#{current_user.id}" %>
                     <% @users.each do |user| %>
-                        <div class="user">
+                        <div class="user user-card">
                             <%= link_to user_profile_path(user_id: user.id), 
                                     data: { turbo_action: "advance" } do %>
                                 <%= render "profiles/profile_image", profile: user.profile %>

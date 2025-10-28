@@ -1,16 +1,16 @@
 <div class="profile-navigation" data-controller="profile" data-turbo-permanent>
     <div class="navigation-links" id="profile-link" data-profile-target="links" >
-        <%= link_to "Profile", user_profile_path(user_id: current_user.id),
+        <%= link_to "Profile", user_profile_path(user_id: params[:user_id]),
             data: { turbo_frame: "profile-pages", turbo_action: "advance", action: "click->profile#highlight" } %>
         <div class="border-blue" ></div>
     </div>
     <div class="navigation-links" id="followers-link" data-profile-target="links" >
-        <%= link_to "Followers", user_followers_path(user_id: current_user.id),
+        <%= link_to "Followers", user_followers_path(user_id: params[:user_id]),
             data: { turbo_frame: "profile-pages", turbo_action: "advance", action: "click->profile#highlight" } %>
         <div class="border-blue"></div>
     </div>
     <div class="navigation-links" id="followings-link" data-profile-target="links" >
-        <%= link_to "Following", user_followings_path(user_id: current_user.id),
+        <%= link_to "Following", user_followings_path(user_id: params[:user_id]),
             data: { turbo_frame: "profile-pages", turbo_action: "advance", action: "click->profile#highlight" } %>
         <div class="border-blue"></div>
     </div>
