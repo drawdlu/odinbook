@@ -53,6 +53,16 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :solid_queue
   config.active_job.queue_adapter = :inline # For render free plan
   config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.active_storage.queues = {
+    analyze: :inline,
+    purge: :inline
+  }
+
+  # Force all broadcasts to run inline (NOT background)
+  config.action_view.form_with_generates_remote_forms = true
+  config.after_initialize do
+    Turbo::Streams::ActionBroadcastJob.queue_adapter = :inline
+  end
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
