@@ -52,6 +52,8 @@ group :development, :test do
 
   gem "rspec-rails"
   gem "letter_opener"
+  gem "faker"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -65,8 +67,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "faker"
-gem "factory_bot_rails"
+
 
 gem "devise", "~> 4.9"
 gem "omniauth"
