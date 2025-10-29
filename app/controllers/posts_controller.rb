@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.turbo_stream
+        format.turbo_stream { render :create }
         format.html { redirect_to root_path }
       else
         format.html { render :new, status: :unprocessable_entity }
