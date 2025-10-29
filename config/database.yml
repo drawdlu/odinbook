@@ -90,6 +90,7 @@ production:
     <<: *default
     database: odinbook_production
     username: odinbook
+    url: <%= ENV["DATABASE_URL"] %>
     password: <%= ENV["ODINBOOK_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
