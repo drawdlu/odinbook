@@ -51,8 +51,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "rspec-rails"
-  gem "faker"
-  gem "factory_bot_rails"
   gem "letter_opener"
 end
 
@@ -66,6 +64,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "faker"
+gem "factory_bot_rails"
 
 gem "devise", "~> 4.9"
 gem "omniauth"
