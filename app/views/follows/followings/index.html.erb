@@ -12,7 +12,7 @@
                     <% @followings.each do |follow| %>
                         <div id="follow_<%= follow.id %>" class="user-card" >
                             <%= link_to user_profile_path(user_id: follow.following.id), 
-                                    data: { turbo_action: "advance" } do %>
+                                    data: { turbo_frame: "main-content", turbo_action: "advance" } do %>
                                 <%= render "profiles/profile_image", profile: follow.following.profile %>
                                 <%= follow.following.username %>
                             <% end %>
