@@ -52,10 +52,6 @@ Rails.application.configure do
   # Replace the default in-process and non-durable queuing backend for Active Job.
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :queue } }
-  config.active_storage.queues = {
-    analyze: :inline,
-    purge: :inline
-  }
 
   # Force all broadcasts to run inline (NOT background)
   config.action_view.form_with_generates_remote_forms = true
