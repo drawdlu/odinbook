@@ -6,6 +6,7 @@ class CreateSolidQueueTables < ActiveRecord::Migration[8.0]
       t.string :priority, null: false
       t.string :job_class, null: false
       t.text :arguments
+      t.string :active_job_id
       t.integer :executions_count, null: false, default: 0
       t.text :exception_details
       t.datetime :scheduled_at
