@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     super do |user|
       if user.persisted?
-        UserMailer.with(user: user).welcome_email.deliver_later
+        UserMailer.with(user: user).welcome_email.deliver_now
       end
     end
   end
