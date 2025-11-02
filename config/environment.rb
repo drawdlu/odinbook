@@ -10,7 +10,7 @@ ActionMailer::Base.smtp_settings = {
   password: ENV["SENDGRID_API_KEY"], # This is the secret sendgrid API key which was issued during API key creation
   domain: "mysite-qfw4.onrender.com",
   address: "smtp.sendgrid.net",
-  port: 587,
+  port: 2525,
   authentication: :plain,
   enable_starttls_auto: true
 }
