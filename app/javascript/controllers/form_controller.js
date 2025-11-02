@@ -27,9 +27,9 @@ export default class extends Controller {
             this.submitTarget.classList.add("active-button")
             this.inputTarget.value = ""
             this.inputTarget.placeholder = "Image Post"
+            remove_if_image_present(this.inputTarget)
             display_image(file[0], this.inputTarget)
         } else {
-            console.log("no file")
             this.submitTarget.disabled = true
             this.inputTarget.disabled = false
             this.submitTarget.classList.remove("active-button")
@@ -41,12 +41,9 @@ export default class extends Controller {
 }
 
 function display_image(img, target) {
-    console.log(img)
     let image = document.createElement("img")
     image.src = URL.createObjectURL(img);
     image.width = 500;
-
-    console.log(image)
     
     let parent = target.parentNode
 
@@ -55,4 +52,10 @@ function display_image(img, target) {
 
 function remove_image(target) {
     target.nextElementSibling.remove()
+}
+
+function remove_if_image_present(target) {
+     if (target.nextElementSibling.nodeName == "IMG") {
+        remove_image(target)
+     }
 }
