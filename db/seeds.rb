@@ -83,7 +83,7 @@ if Rails.env.production?
   user2.followed_users.find_or_create_by!(following: user3, status: 1)
   user3.followed_users.find_or_create_by!(following: user1, status: 1)
   user2.follower_users.find_or_create_by!(follower: user3, status: 1)
-  user1.follower_users.find_or_create_by!(follower: user1, status: 1)
+  user1.follower_users.find_or_create_by!(follower: user2, status: 1)
 
   # Create posts
   text1 = Text.find_or_create_by!(content: "This is a great day")
