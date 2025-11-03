@@ -22,3 +22,12 @@ body {
     height: 6ch;
     border-bottom: 1px solid var(--dark-gray);
 }
+
+.notification {
+    text-align: center;
+    margin-left: -600px;
+    width: 100vw;
+    background-color: var(--dark-gray);
+    border-left: 1px solid var(--dark-gray);
+    border-right:  1px solid var(--dark-gray);
+}
