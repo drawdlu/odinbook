@@ -53,5 +53,16 @@ A a Full Stack Social Media clone
 
 ![App Showcase](app/assets/images/showcase.gif)
 
+## Test the app with these login credentials
+- usernames
+    - pedro
+    - steve
+    - stan
+- password for these accounts
+    - 1234Aa*&
+
+Currently live on render as of November 4, 2025:
+https://mysite-qfw4.onrender.com/users/sign_in
+
 This is the final project for the Rails course in The Odin Project: 
 https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project
