@@ -33,7 +33,7 @@ A a Full Stack Social Media clone
         - Disables submit when text input is empty or no file uploaded
     - Updates profile links based on current page
 
-## Extra credit polymorphic posts
+### Extra credit polymorphic posts
 - Posts can either be a text or an image
     - Post model uses a polymorphic association to either a Text or Picture model
 
